@@ -1,0 +1,122 @@
+[
+  {
+    "_id": "3fadc18fed4990a8e82c0e54",
+    "name": "kim",
+    "lastName": "o'hara",
+    "email": "kim.o'hara@coder.com",
+    "password": "hola1234",
+    "age": 21,
+    "avatar": "https://avatars.githubusercontent.com/u/6700322",
+    "role": "admin"
+  },
+  {
+    "_id": "6c875f3df2a2c2b6ccbef500",
+    "name": "julia",
+    "lastName": "farrell",
+    "email": "julia.farrell@coder.com",
+    "password": "hola1234",
+    "age": 19,
+    "avatar": "https://avatars.githubusercontent.com/u/49743241",
+    "role": "admin"
+  },
+  {
+    "_id": "806ad5a0c9a6f4c7bab4cffd",
+    "name": "david",
+    "lastName": "kling",
+    "email": "david.kling@coder.com",
+    "password": "hola1234",
+    "age": 24,
+    "avatar": "https://avatars.githubusercontent.com/u/31614481",
+    "role": "premium"
+  },
+  {
+    "_id": "ade710ebde3f0efbabc2c690",
+    "name": "miss",
+    "lastName": "ana",
+    "email": "miss.ana.schmeler@coder.com",
+    "password": "hola1234",
+    "age": 65,
+    "avatar": "https://avatars.githubusercontent.com/u/66082047",
+    "role": "admin"
+  },
+  {
+    "_id": "2c9a2cf7fceabef4faef3a7a",
+    "name": "anna",
+    "lastName": "larson",
+    "email": "anna.larson@coder.com",
+    "password": "hola1234",
+    "age": 52,
+    "avatar": "https://avatars.githubusercontent.com/u/31586746",
+    "role": "admin"
+  },
+  {
+    "_id": "bfa9dafcf3d3a9dd77aead5c",
+    "name": "peter",
+    "lastName": "volkman",
+    "email": "peter.volkman@coder.com",
+    "password": "hola1234",
+    "age": 28,
+    "avatar": "https://avatars.githubusercontent.com/u/48907647",
+    "role": "premium"
+  },
+  {
+    "_id": "2db91be4bafa57fa6f3ddc3b",
+    "name": "ross",
+    "lastName": "towne",
+    "email": "ross.towne@coder.com",
+    "password": "hola1234",
+    "age": 70,
+    "avatar": "https://avatars.githubusercontent.com/u/83188436",
+    "role": "premium"
+  },
+  {
+    "_id": "2e5b96606cac413972ba35f7",
+    "name": "homer",
+    "lastName": "steuber",
+    "email": "homer.steuber@coder.com",
+    "password": "hola1234",
+    "age": 66,
+    "avatar": "https://avatars.githubusercontent.com/u/27528131",
+    "role": "admin"
+  },
+  {
+    "_id": "abc4dfdf3bba9fd7491e5bca",
+    "name": "ramiro",
+    "lastName": "nader",
+    "email": "ramiro.nader@coder.com",
+    "password": "hola1234",
+    "age": 47,
+    "avatar": "https://avatars.githubusercontent.com/u/25365889",
+    "role": "admin"
+  },
+  {
+    "_id": "eedbdfff5cbebf466fbfa28d",
+    "name": "joey",
+    "lastName": "smith",
+    "email": "joey.smith@coder.com",
+    "password": "hola1234",
+    "age": 33,
+    "avatar": "https://avatars.githubusercontent.com/u/79734264",
+    "role": "user"
+  },
+  {
+    "_id": "5cf61008189febc494a3e9db",
+    "name": "rodney",
+    "lastName": "kertzmann",
+    "email": "rodney.kertzmann@coder.com",
+    "password": "hola1234",
+    "age": 53,
+    "avatar": "https://avatars.githubusercontent.com/u/34171234",
+    "role": "admin"
+  },
+  {
+    "_id": "6ade32a3122d3bca64e3d8df",
+    "name": "dr.",
+    "lastName": "al",
+    "email": "dr..al.carroll.iv@coder.com",
+    "password": "hola1234",
+    "age": 40,
+    "avatar": "https://avatars.githubusercontent.com/u/20486657",
+    "role": "premium"
+  }
+]
