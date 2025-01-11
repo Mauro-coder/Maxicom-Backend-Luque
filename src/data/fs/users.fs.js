@@ -32,7 +32,7 @@ class UsersManager {
       throw error;
     }
   }
-  async create() {
+  async createMock() {
     try {
       const fullName = faker.person.fullName().toLowerCase().split(" ");
       const user = {
@@ -58,9 +58,71 @@ class UsersManager {
       throw error;
     }
   }
+  async create(data) {
+    try {
+      const user = {
+        _id: faker.database.mongodbObjectId(),
+        ...data,
+      };
+      const dataOfFile = await this.readFile();
+      dataOfFile.push(user);
+      await this.writeFile(dataOfFile);
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  }
   async readAll() {
     try {
       return await this.readFile();
+    } catch (error) {
+      throw error;
+    }
+  }
+  async readOne(id) {
+    try {
+      const allUsers = await this.readFile();
+      const user = allUsers.find((each) => each._id === id);
+      if (index === -1) {
+        const error = new Error(`User with ID ${id} not found`);
+        error.statusCode = 404;
+        throw error;
+      }
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async updateOne(id, newData) {
+    try {
+      const allUsers = await this.readFile();
+      const index = allUsers.findIndex((user) => user._id === id);
+      if (index === -1) {
+        const error = new Error(`User with ID ${id} not found`);
+        error.statusCode = 404;
+        throw error;
+      }
+      allUsers[index] = { ...allUsers[index], ...newData };
+      await this.writeFile(allUsers);
+      return allUsers[index];
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async destroyOne(id) {
+    try {
+      const allUsers = await this.readFile();
+      const index = allUsers.findIndex((user) => user._id === id);
+      if (index === -1) {
+        const error = new Error(`User with ID ${id} not found`);
+        error.statusCode = 404;
+        throw error;
+      }
+      const [removedUser] = allUsers.splice(index, 1);
+      await this.writeFile(allUsers);
+      return removedUser;
     } catch (error) {
       throw error;
     }
