@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker";
 import fs from "fs/promises";
 
-const path = "./data/fs/files/products.json";
+const path = "./src/data/fs/files/products.json";
 
 class ProductsManager {
   constructor() {
@@ -66,11 +66,24 @@ class ProductsManager {
       throw error;
     }
   }
-  async readAll() {
+  async readAll(category) {
     try {
-        return await this.readFile()
+      let all = await this.readFile();
+      if (category) {
+        all = all.filter((each) => each.category === category);
+      }
+      return all;
     } catch (error) {
-        throw error
+      throw error;
+    }
+  }
+  async readOne(id) {
+    try {
+      const all = await this.readFile();
+      const one = all.find((each) => each._id === id);
+      return one;
+    } catch (error) {
+      throw error;
     }
   }
 }

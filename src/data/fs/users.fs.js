@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker";
 import fs from "fs/promises";
 
-const path = "./data/fs/files/users.json";
+const path = "./src/data/fs/files/users.json";
 
 class UsersManager {
   constructor() {
