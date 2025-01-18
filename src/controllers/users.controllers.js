@@ -1,6 +1,6 @@
 import usersManager from "../data/fs/users.fs.js";
 
-const createUser = async (req, res) => {
+const createUser = async (req, res, next) => {
   try {
     const data = req.body;
     if (!data.email) {
@@ -26,37 +26,33 @@ const createUser = async (req, res) => {
     const one = await usersManager.create(data);
     return res.status(201).json({ response: one });
   } catch (error) {
-    const status = error.statusCode || 500;
-    const message = error.message || "API ERROR";
-    return res.status(status).json({ error: message });
+    next(error);
   }
 };
 
-const readUsers = async (req, res) => {
+const readUsers = async (req, res, next) => {
   try {
     const { role } = req.query;
     const all = await usersManager.readAll(role);
     if (all.length > 0) {
       return res.status(200).json({ response: all });
     }
-    return res.status(404).json({ response: "Not found!" });
+    const error = new Error("Not found");
+    error.statusCode = 404;
+    throw error;
   } catch (error) {
-    const status = error.statusCode || 500;
-    const message = error.message || "API ERROR";
-    return res.status(status).json({ error: message });
+    next(error);
   }
 };
 
-const destroyUser = async (req, res) => {
+const destroyUser = async (req, res, next) => {
   try {
     const { uid } = req.params;
     const one = await usersManager.destroyOne(uid);
     return res.status(200).json({ response: one });
   } catch (error) {
-    const status = error.statusCode || 500;
-    const message = error.message || "API ERROR";
-    return res.status(status).json({ error: message });
+    next(error);
   }
 };
 
-export { createUser, readUsers, destroyUser }
+export { createUser, readUsers, destroyUser };
