@@ -78,5 +78,243 @@
     "stock": 740,
     "photo": "https://loremflickr.com/2422/79?lock=7934318659123649",
     "category": "accesorios"
+  },
+  {
+    "_id": "d77dd3eddadb0fdf95b9c963",
+    "title": "auriculares iphone",
+    "price": 150,
+    "stock": 100,
+    "category": "accesorios"
+  },
+  {
+    "_id": "3f01274cd3889dbb2b7bbd9e",
+    "title": "iphone 16 pro max",
+    "price": 1500,
+    "stock": 30,
+    "category": "celulares"
+  },
+  {
+    "_id": "fced723047a31feca553fdg3",
+    "title": "motorola edge 50pro",
+    "price": 999,
+    "stock": 30,
+    "category": "celulares"
+  },
+  {
+    "_id": "bd5cb660ef2ed36b289474d0",
+    "title": "motorola 50 fusion",
+    "price": 850,
+    "stock": 20,
+    "category": "celulares"
+  },
+  {
+    "_id": "fced723047a31feca553fde1",
+    "title": "iPhone 14 Pro Max",
+    "price": 1200,
+    "stock": 15,
+    "category": "celulares"
+  },
+  {
+    "_id": "fced723047a31feca553fde2",
+    "title": "Samsung Galaxy S23 Ultra",
+    "price": 1100,
+    "stock": 18,
+    "category": "celulares"
+  },
+  {
+    "_id": "fced723047a31feca553fde3",
+    "title": "Xiaomi 13 Pro",
+    "price": 950,
+    "stock": 25,
+    "category": "celulares"
+  },
+  {
+    "_id": "fced723047a31feca553fde4",
+    "title": "OnePlus 11",
+    "price": 900,
+    "stock": 22,
+    "category": "celulares"
+  },
+  {
+    "_id": "fced723047a31feca553fde5",
+    "title": "Google Pixel 7 Pro",
+    "price": 1000,
+    "stock": 20,
+    "category": "celulares"
+  },
+  {
+    "_id": "fced723047a31feca553fde6",
+    "title": "Huawei P50 Pro",
+    "price": 850,
+    "stock": 16,
+    "category": "celulares"
+  },
+  {
+    "_id": "fced723047a31feca553fde7",
+    "title": "OPPO Find X5 Pro",
+    "price": 950,
+    "stock": 14,
+    "category": "celulares"
+  },
+  {
+    "_id": "fced723047a31feca553fde8",
+    "title": "Realme GT 3",
+    "price": 700,
+    "stock": 30,
+    "category": "celulares"
+  },
+  {
+    "_id": "fced723047a31feca553fde9",
+    "title": "Sony Xperia 1 IV",
+    "price": 1100,
+    "stock": 10,
+    "category": "celulares"
+  },
+  {
+    "_id": "fced723047a31feca553fdea",
+    "title": "Asus ROG Phone 7",
+    "price": 1200,
+    "stock": 8,
+    "category": "celulares"
+  },
+  {
+    "_id": "fced723047a31feca553fdeb",
+    "title": "Vivo X90 Pro",
+    "price": 920,
+    "stock": 12,
+    "category": "celulares"
+  },
+  {
+    "_id": "fced723047a31feca553fdec",
+    "title": "Nokia X30 5G",
+    "price": 550,
+    "stock": 40,
+    "category": "celulares"
+  },
+  {
+    "_id": "fced723047a31feca553fded",
+    "title": "Samsung Galaxy A54",
+    "price": 400,
+    "stock": 35,
+    "category": "celulares"
+  },
+  {
+    "_id": "fced723047a31feca553fdee",
+    "title": "Motorola Edge 40",
+    "price": 800,
+    "stock": 18,
+    "category": "celulares"
+  },
+  {
+    "_id": "fced723047a31feca553fdef",
+    "title": "Poco F5",
+    "price": 450,
+    "stock": 28,
+    "category": "celulares"
+  },
+  {
+    "_id": "fced723047a31feca553fdf0",
+    "title": "Redmi Note 13 Pro",
+    "price": 350,
+    "stock": 50,
+    "category": "celulares"
+  },
+  {
+    "_id": "fced723047a31feca553fdf1",
+    "title": "Samsung Galaxy Z Fold 5",
+    "price": 1800,
+    "stock": 5,
+    "category": "celulares"
+  },
+  {
+    "_id": "fced723047a31feca553fdf2",
+    "title": "Samsung Galaxy Z Flip 5",
+    "price": 1000,
+    "stock": 10,
+    "category": "celulares"
+  },
+  {
+    "_id": "fced723047a31feca553fdf3",
+    "title": "iPhone SE 3",
+    "price": 500,
+    "stock": 25,
+    "category": "celulares"
+  },
+  {
+    "_id": "fced723047a31feca553fdf4",
+    "title": "Huawei Mate X3",
+    "price": 1900,
+    "stock": 4,
+    "category": "celulares"
+  },
+  {
+    "_id": "fced723047a31feca553fdf5",
+    "title": "Honor Magic Vs",
+    "price": 1200,
+    "stock": 7,
+    "category": "celulares"
+  },
+  {
+    "_id": "fced723047a31feca553fdf6",
+    "title": "Infinix Zero Ultra",
+    "price": 450,
+    "stock": 30,
+    "category": "celulares"
+  },
+  {
+    "_id": "fced723047a31feca553fdf7",
+    "title": "Tecno Phantom V Fold",
+    "price": 1300,
+    "stock": 6,
+    "category": "celulares"
+  },
+  {
+    "_id": "fced723047a31feca553fdf8",
+    "title": "Realme Narzo 60 Pro",
+    "price": 330,
+    "stock": 45,
+    "category": "celulares"
+  },
+  {
+    "_id": "fced723047a31feca553fdf9",
+    "title": "Xiaomi Mix Fold 3",
+    "price": 1700,
+    "stock": 5,
+    "category": "celulares"
+  },
+  {
+    "_id": "fced723047a31feca553fdfa",
+    "title": "Samsung Galaxy M14",
+    "price": 300,
+    "stock": 50,
+    "category": "celulares"
+  },
+  {
+    "_id": "fced723047a31feca553fdfb",
+    "title": "Motorola G Power 5G",
+    "price": 350,
+    "stock": 40,
+    "category": "celulares"
+  },
+  {
+    "_id": "fced723047a31feca553fdfc",
+    "title": "iPhone 15 Pro",
+    "price": 1300,
+    "stock": 15,
+    "category": "celulares"
+  },
+  {
+    "_id": "fced723047a31feca553fdfd",
+    "title": "Google Pixel Fold",
+    "price": 1800,
+    "stock": 8,
+    "category": "celulares"
+  },
+  {
+    "_id": "fced723047a31feca553fdfe",
+    "title": "Sony Xperia 10 V",
+    "price": 450,
+    "stock": 32,
+    "category": "celulares"
   }
 ]

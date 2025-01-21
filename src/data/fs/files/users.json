@@ -90,16 +90,6 @@
     "role": "admin"
   },
   {
-    "_id": "eedbdfff5cbebf466fbfa28d",
-    "name": "joey",
-    "lastName": "smith",
-    "email": "joey.smith@coder.com",
-    "password": "hola1234",
-    "age": 33,
-    "avatar": "https://avatars.githubusercontent.com/u/79734264",
-    "role": "user"
-  },
-  {
     "_id": "5cf61008189febc494a3e9db",
     "name": "rodney",
     "lastName": "kertzmann",
@@ -117,6 +107,46 @@
     "password": "hola1234",
     "age": 40,
     "avatar": "https://avatars.githubusercontent.com/u/20486657",
+    "role": "premium"
+  },
+  {
+    "_id": "c7e9acfabcf331f93cd27ec5",
+    "name": "mauro",
+    "lastName": "luque",
+    "email": "mauro.luque@coder.com",
+    "password": "hola1234",
+    "age": 28,
+    "avatar": "https://avatars.githubusercontent.com/u/49743241",
+    "role": "admin"
+  },
+  {
+    "_id": "de1cad24dc1dc50bcd5ffb3e",
+    "name": "ulises",
+    "lastName": "pandeles",
+    "email": "ulises.pandeles@coder.com",
+    "password": "hola1234",
+    "age": 24,
+    "avatar": "https://avatars.githubusercontent.com/u/49743241",
+    "role": "premium"
+  },
+  {
+    "_id": "f383cb2a2a3692bfcbb99fd1",
+    "name": "fabrizio",
+    "lastName": "fangio",
+    "email": "fabrizio.fangio@coder.com",
+    "password": "hola1234",
+    "age": 24,
+    "avatar": "https://avatars.githubusercontent.com/u/49743241",
+    "role": "user"
+  },
+  {
+    "_id": "b0c1b6f0ce93d295ed8fba6c",
+    "name": "luis",
+    "lastName": "suarez",
+    "email": "luis.suarez@coder.com",
+    "password": "hola1234",
+    "age": 37,
+    "avatar": "https://avatars.githubusercontent.com/u/49743241",
     "role": "premium"
   }
 ]
