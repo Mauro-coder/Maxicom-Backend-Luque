@@ -45,6 +45,21 @@ const readUsers = async (req, res, next) => {
   }
 };
 
+const readOneUser = async (req, res, next) => {
+  try{
+    const { uid } = req.params;
+    const one = await usersManager.readOne(uid);
+    if (one) {
+      return res.status(200).json({ response: one });
+    }
+    const error = new Error("Not Found");
+    error.statusCode = 404;
+    throw error;
+  } catch (error) {
+    next(error);
+  }
+}
+
 const destroyUser = async (req, res, next) => {
   try {
     const { uid } = req.params;
@@ -55,4 +70,9 @@ const destroyUser = async (req, res, next) => {
   }
 };
 
-export { createUser, readUsers, destroyUser };
+export { 
+  createUser,
+  readUsers,
+  readOneUser,
+  destroyUser,
+};

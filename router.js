@@ -1,13 +1,9 @@
-//import productsManager from "./data/products.manager.js";
 import productsManager from "./data/fs/products.fs.js";
-//import usersManager from "./data/users.manager.js";
 import usersManager from "./data/fs/users.fs.js"
 
-// la funcion de enrutamiento depende:
-//del objeto de requerimientos req
-//del objeto de respuesta a enviar al cliente res
+
 async function router(req, res) {
-  const { url /* , method */ } = req;
+  const { url } = req;
   const type = { "Contet-Type": "application/json" };
   try {
     switch (url) {
