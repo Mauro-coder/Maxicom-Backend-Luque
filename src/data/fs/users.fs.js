@@ -87,7 +87,7 @@ class UsersManager {
     try {
       const allUsers = await this.readFile();
       const user = allUsers.find((each) => each._id === id);
-      const index = all.findIndex((product) => product._id === id);
+      const index = allUsers.findIndex((product) => product._id === id);
       if (index === -1) {
         const error = new Error(`User with ID ${id} not found`);
         error.statusCode = 404;

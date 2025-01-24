@@ -60,6 +60,17 @@ const readOneUser = async (req, res, next) => {
   }
 }
 
+const updateUser = async (req, res, next) =>{
+  try {
+    const { uid } = req.params;
+    const data = req.body;
+    const one = await usersManager.updateOne(uid, data);
+    return res.status(200).json({response: one})
+  } catch (error) {
+    next(error);
+  }
+}
+
 const destroyUser = async (req, res, next) => {
   try {
     const { uid } = req.params;
@@ -74,5 +85,6 @@ export {
   createUser,
   readUsers,
   readOneUser,
+  updateUser,
   destroyUser,
 };
