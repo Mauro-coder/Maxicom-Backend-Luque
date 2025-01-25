@@ -14,7 +14,7 @@ Es un proyecto recien comenzado, actualmente no tiene todas las funcionalidades 
 
 ### Utilización 💻
 
-- En el buscador ejecute la siguiente direccion [http://localhost:8080], esto le permitira ingresar a la pagina web por defecto para poder ver las distintas interacciones que surgen.
+- En el buscador ejecute la siguiente direccion [http://localhost:8080](http://localhost:8080), esto le permitira ingresar a la pagina web por defecto para poder ver las distintas interacciones que surgen.
 - A continuacion mediante postman puede realizar distintas request para verificar la funcionalizacion de las rutas, para esto puede utilizar distintos metodos:
     - get(para poder encontrar todo/s el/los producto/s o usuario/s).
     ![image](/public/img/get_prod.png) ![image](/public/img/get_oneprod.png) ![image](/public/img/get_user.png) ![image](/public/img/get_oneuser.png)
@@ -34,4 +34,4 @@ Es un proyecto recien comenzado, actualmente no tiene todas las funcionalidades 
 
 # Desarrollado por Mauro Luque 
 
-### LinkedIn: [https://www.linkedin.com/in/mauro-luque/]
+### LinkedIn: [https://www.linkedin.com/in/mauro-luque/](https://www.linkedin.com/in/mauro-luque/)
