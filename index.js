@@ -1,3 +1,5 @@
+import { createServer } from "http";
+import { Server as SocketServer } from "socket.io";
 import express from "express";
 import morgan from "morgan";
 import { engine } from "express-handlebars";
@@ -5,12 +7,20 @@ import __dirname from "./utils.js";
 import router from "./src/routers/index.router.js";
 import pathHandler from "./src/middlewares/pathHandler.mid.js";
 import errorHandler from "./src/middlewares/errorHandler.mid.js";
+import socketHelper from "./src/helpers/socket.helper.js";
 
-/* server settings */
+/* express server settings */
 const server = express();
 const port = 8080;
 const ready = () => console.log("server ready on port " + port);
-server.listen(port, ready);
+const httpServer = createServer(server)
+httpServer.listen(port, ready);
+
+/* socket server settings */
+const socketServer = new SocketServer(httpServer)
+socketServer.on("connection", socketHelper)
+export { socketServer }
+
 
 /* template engine */
 server.engine("handlebars", engine());

@@ -1,11 +1,15 @@
-<section>
-    {{#if product}}
-    <h1>vista de detalle del producto</h1>
-    <h2>{{product.title}}</h2>
-    <h3>USD{{product.price}}</h3>
-    <h3>{{product.stock}}units</h3>
-    <button class="btn btn-info">BUY!</button>
-    {{else}}
-    <h3>NOT FOUND PRODUCT!</h3>
-    {{/if}}
-</section>
+<main class="d-flex w-100 flex-grow-1">
+    <section class="d-flex flex-column align-items-center w-100">
+        <h1 class="bg-primary-subtle p-2 text-center text-primary w-100">DETAILS</h1>
+        <section class="d-flex flex-column justify-content-center align-items-center w-50 m-3">
+            {{#if product}}
+            <h3 class="m-2 p-2 text-center">PRODUCT: {{product.title}}</h3>
+            <h5 class="m-2 p-2 text-center">PRICE: $USD {{product.price}}</h5>
+            <h5 class="m-2 p-2 text-center">STOCK: {{product.stock}}</h5>
+            <img style="width: 360px; height: 360px" class="m-2 object-fit-cover" src="{{product.photo}}" />
+            {{else}}
+            <h3 class="m-2 p-2 text-center">NOT FOUND PRODUCT!</h3>
+            {{/if}}
+        </section>
+    </section>
+</main>

@@ -1,18 +1,24 @@
-<h1>vista de inicio</h1>
-<section class="d-flex flex-wrap justify-content-evenly">
-    {{#each products}}
-    <div class="card my-2" style="width: 18rem;">
-        {{#if this.photo}}
-            <img src="{{this.photo}}" class="card-img-top" alt={{this._id}} style="height: 18rem; object-fit: cover">
-        {{else}}
-            <img src="https://cdn-icons-png.flaticon.com/512/9402/9402212.png" alt={{this._id}} style="height: 18rem; object-fit: cover">
-        {{/if}}
-        <div class="card-body">
-            <h5 class="card-title">{{this.title}}</h5>
-            <p class="card-text">USD{{this.price}}</p>
-            <a href="/product/{{this._id}}" class="btn btn-primary">+info</a>
-        </div>
-    </div>
-    {{/each}}
-</section>
+<main class="d-flex w-100 flex-grow-1">
+    <section class="d-flex flex-column align-items-center w-100">
+        <h1 class="bg-primary-subtle p-2 text-center text-primary w-100">PRODUCTS</h1>
+        <section class="d-flex justify-content-evenly align-items-center flex-wrap w-100 m-3">
+            {{#each products}}
+            <article class="card my-2" style="width: 18rem; height: 28rem; display: flex; flex-direction: column;">
+                {{#if this.photo}}
+                <img src="{{this.photo}}" class="card-img-top" alt={{this._id}}
+                    style="height: 18rem; object-fit: cover;">
+                {{else}}
+                <img src="https://cdn-icons-png.flaticon.com/512/9402/9402212.png" alt={{this._id}}
+                    style="height: 18rem; object-fit: cover;">
+                {{/if}}
+                <div class="card-body" style="flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                    <h5 class="card-title">{{this.title}}</h5>
+                    <p class="card-text">USD{{this.price}}</p>
+                    <a href="/product/{{this._id}}" class="btn btn-primary">+info</a>
+                </div>
+            </article>
+            {{/each}}
+        </section>
+    </section>
+</main>
 <script src="./index.js"></script>
