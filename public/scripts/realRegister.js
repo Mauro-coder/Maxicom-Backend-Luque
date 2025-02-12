@@ -23,16 +23,16 @@ socket.on("products", (data) => {
 });
 
 document.querySelector("#registerProduct").addEventListener("click", async () => {
-  const productName = document.querySelector("#productName").value;
+  const title = document.querySelector("#title").value;
   const price = document.querySelector("#price").value;
   const stock = document.querySelector("#stock").value;
   const category = document.querySelector("#category").value;
-  const imgProduct = document.querySelector("#imgProduct").value;
-  const product = { productName, price, stock, category, imgProduct };
+  const photo = document.querySelector("#photo").value;
+  const product = { title, price, stock, category, photo };
   socket.emit("new product", product);
-  document.querySelector("#productName").value = "";
+  document.querySelector("#title").value = "";
   document.querySelector("#price").value = "";
   document.querySelector("#stock").value = "";
   document.querySelector("#category").value = "";
-  document.querySelector("#imgProduct").value = "";
+  document.querySelector("#photo").value = "";
 });

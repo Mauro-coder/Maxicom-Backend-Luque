@@ -9,7 +9,7 @@ async function socketHelper(socket) {
   /* socket emite SOLO al socket id */
   socket.emit("products", products);
 
-  socket.on("new user", async (data) => {
+  socket.on("new product", async (data) => {
     await productsManager.create(data);
     const products = await productsManager.readAll();
     /* socketServer emite a TODOS los sockets */
