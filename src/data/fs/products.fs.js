@@ -73,14 +73,13 @@ class ProductsManager {
         _id,
         ...data,
       };
-      //una vez construido el producto
-      //se lee el archivo
+
       const dataOfFile = await this.readFile();
-      //se pushea el nuevo producto
+
       dataOfFile.push(newProduct);
-      //se sobre escribe el archivo con la nueva data
+
       await this.writeFile(dataOfFile);
-      //retorno el nuevo producto al cliente
+
       return newProduct;
     } catch (error) {
       throw error;
