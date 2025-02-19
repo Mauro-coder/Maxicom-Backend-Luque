@@ -1,4 +1,5 @@
-import productsManager from "../data/fs/products.fs.js";
+//import productsManager from "../data/fs/products.fs.js";
+import productsManager from "../data/mongo/products.mongo.js";
 
 const createProduct = async (req, res, next) => {
   try {
@@ -28,7 +29,7 @@ const readProducts = async (req, res, next) => {
 const readOneProduct = async (req, res, next) => {
   try {
     const { pid } = req.params;
-    const one = await productsManager.readOne(pid);
+    const one = await productsManager.readById(pid);
     if (one) {
       return res.status(200).json({ response: one });
     }
@@ -44,7 +45,7 @@ const updateProduct = async (req, res, next) => {
   try {
     const { pid } = req.params;
     const data = req.body;
-    const one = await productsManager.updateOne(pid, data);
+    const one = await productsManager.updateById(pid, data);
     return res.status(200).json({ response: one });
   } catch (error) {
     next(error);
@@ -54,7 +55,7 @@ const updateProduct = async (req, res, next) => {
 const destroyProduct = async (req, res, next) => {
   try {
     const { pid } = req.params;
-    const one = await productsManager.destroyOne(pid);
+    const one = await productsManager.destroyById(pid);
     return res.status(200).json({ response: one });
   } catch (error) {
     next(error);
