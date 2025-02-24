@@ -62,10 +62,20 @@ const destroyProduct = async (req, res, next) => {
   }
 };
 
+const paginate = async (req, res, next) => {
+  try {
+    const all = await productsManager.paginate()
+    return res.status(200).json({ response: all });
+  } catch (error) {
+    next(error)
+  }
+}
+
 export {
   createProduct,
   readProducts,
   readOneProduct,
   updateProduct,
   destroyProduct,
+  paginate,
 };

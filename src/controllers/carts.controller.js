@@ -3,7 +3,11 @@ import cartsManager from "../data/mongo/carts.mongo.js";
 const addProductToCart = async (req, res, next) => {
   try {
     const { user_id, product_id, quantity } = req.body;
-    const one = await cartsManager.addProductToCart(user_id, product_id, quantity);
+    const one = await cartsManager.addProductToCart(
+      user_id,
+      product_id,
+      quantity
+    );
     return res.status(201).json({
       method: req.method,
       url: req.url,
@@ -68,10 +72,23 @@ const removeProductFromCart = async (req, res, next) => {
     next(error);
   }
 };
-
+const totalToPay = async (req, res, next) => {
+  try {
+    const { user_id } = req.params;
+    const total = await cartsManager.totalToPay(user_id);
+    return res.status(200).json({
+      method: req.method,
+      url: req.url,
+      response: total,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 export {
   addProductToCart,
   readProductsFromUser,
   updateQuantity,
   removeProductFromCart,
+  totalToPay,
 };

@@ -5,9 +5,9 @@ const schema = new Schema(
   {
     name: { type: String },
     age: { type: Number },
-    email: { type: String, required: true, unique: true },
+    email: { type: String, required: true, unique: true, index: true },
     password: { type: String, required: true },
-    role: { type: String, default: "user", enum: ["user", "admin", "master"] },
+    role: { type: String, default: "user", enum: ["user", "admin", "master"], index: true },
     avatar: {
       type: String,
       default:

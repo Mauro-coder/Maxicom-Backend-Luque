@@ -1,3 +1,5 @@
+import { Types } from "mongoose";
+
 class Manager {
   constructor(model) {
     this.model = model;
@@ -28,7 +30,7 @@ class Manager {
   };
   readOne = async (filter) => {
     try {
-      const one = await this.model.findOne(data);
+      const one = await this.model.findOne(filter);
       return one;
     } catch (error) {
       throw error;
@@ -66,6 +68,14 @@ class Manager {
       throw error;
     }
   };
+  paginate = async(page, number)=> {
+    try {
+      const all = await this.model.paginate()
+      return all
+    } catch (error) {
+      throw error
+    }
+  }
 }
 
 export default Manager;
