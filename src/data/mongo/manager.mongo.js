@@ -1,4 +1,4 @@
-import { Types } from "mongoose";
+import mongoose from "mongoose";
 
 class Manager {
   constructor(model) {
@@ -14,7 +14,7 @@ class Manager {
   };
   readAll = async (filter) => {
     try {
-      const all = await this.model.find(filter);
+      const all = await this.model.find(filter).lean();
       return all;
     } catch (error) {
       throw error;
@@ -22,7 +22,7 @@ class Manager {
   };
   readById = async (id) => {
     try {
-      const one = await this.model.findById(id);
+      const one = await this.model.findById(id).lean();
       return one;
     } catch (error) {
       throw error;
@@ -30,7 +30,10 @@ class Manager {
   };
   readOne = async (filter) => {
     try {
-      const one = await this.model.findOne(filter);
+      if (typeof filter === "string" && mongoose.Types.ObjectId.isValid(filter)) {
+        filter = { _id: new mongoose.Types.ObjectId(filter) };
+      }
+      const one = await this.model.findOne(filter).lean();
       return one;
     } catch (error) {
       throw error;

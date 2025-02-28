@@ -1,4 +1,7 @@
-import productsManager from "../data/fs/products.fs.js";
+// import productsManager from "../data/fs/products.fs.js";
+import productsManager from "../data/mongo/products.mongo.js";
+import mongoose from 'mongoose';
+
 
 const indexView = async (req, res, next) => {
   try {
@@ -16,11 +19,21 @@ const indexView = async (req, res, next) => {
 const productView = async (req, res, next) => {
   try {
     const { pid } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(pid)) {
+      return res.status(400).render("product", { title: "Invalid Product ID" });
+    }
+
     const one = await productsManager.readOne(pid);
+    if (!one) {
+      return res.status(404).render("product", { title: "Product Not Found" });
+    }
+
     const data = {
       title: "Product Detail",
       product: one,
     };
+
     return res.status(200).render("product", data);
   } catch (error) {
     next(error);
