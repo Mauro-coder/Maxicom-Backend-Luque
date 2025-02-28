@@ -8,6 +8,26 @@ const schema = new Schema({
     state: {type: String, default: "reserved", enum: ["reserved", "paid", "delivered"], index: true}
 },{timestamps: true})
 
+schema.pre(
+    "find", function() { 
+        this.populate("user_id", "-_id email avatar");
+        this.populate("product_id", "-_id title stock price image")
+    })
+schema.pre(
+    "findOne", function() { 
+        this.populate("user_id", "-_id email avatar");
+        this.populate("product_id", "-_id title stock price image")
+    })
+schema.pre(
+    "findOneAndUpdate", function() { 
+        this.populate("user_id", "-_id email avatar");
+        this.populate("product_id", "-_id title stock price image")
+    })
+ schema.pre(
+    "findOneAndDelete", function() { 
+        this.populate("user_id", "-_id email avatar");
+        this.populate("product_id", "-_id title stock price image")
+    })
 const Cart = model(collection, schema)
 
 export default Cart;
