@@ -12,6 +12,9 @@ Como todo proyecto nunca se enuentra terminado dado que siempre puede mejorarse,
 - Ejecute 'npm install' para instalar dependencias y crear la carpeta 'node_modules'.
 - Ejecute 'npm run dev' para levantarlo en servidor local.
 
+>_[!WARNING]_
+> Asegurate de instalar todas las dependencias para su correcta utilización!
+
 ### Utilización 💻
 
 - En el buscador ejecute la siguiente direccion [http://localhost:8080](http://localhost:8080), esto le permitira ingresar a la pagina web por defecto para poder ver las distintas interacciones que surgen.
