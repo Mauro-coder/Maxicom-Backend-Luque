@@ -82,10 +82,34 @@ const destroyById = async (req, res, next) => {
   }
 };
 
+const login = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    const one = await usersManager.login(email, password);
+    if (one) {
+      return res.status(200).json({
+        method: req.method,
+        url: req.url,
+        response: {
+          user_id: one._id,
+          role: one.role, // Devolver el rol del usuario
+        },
+      });
+    }
+    const error = new Error("Invalid credentials");
+    error.statusCode = 401;
+    throw error;
+  } catch (error) {
+    next(error);
+  }
+};
+
+
 export { 
   createUser,
   readUsers,
   readById,
   updateById,
   destroyById,
+  login,
 };

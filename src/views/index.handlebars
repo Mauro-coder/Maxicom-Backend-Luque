@@ -1,24 +1,25 @@
-<main class="d-flex w-100 flex-grow-1">
-    <section class="d-flex flex-column align-items-center w-100">
-        <h1 class="bg-primary-subtle p-2 text-center text-primary w-100">PRODUCTS</h1>
-        <section class="d-flex justify-content-evenly align-items-center flex-wrap w-100 m-3">
-            {{#each products}}
-            <article class="card my-2" style="width: 18rem; height: 28rem; display: flex; flex-direction: column;">
-                {{#if this.image}}
-                <img src="{{this.image}}" class="card-img-top" alt={{this._id}}
-                    style="height: 18rem; object-fit: cover;">
-                {{else}}
-                <img src="https://cdn-icons-png.flaticon.com/512/9402/9402212.png" alt={{this._id}}
-                    style="height: 18rem; object-fit: cover;">
-                {{/if}}
-                <div class="card-body" style="flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
-                    <h5 class="card-title">{{this.title}}</h5>
-                    <p class="card-text">USD{{this.price}}</p>
-                    <a href="/product/{{this._id}}" class="btn btn-primary">+info</a>
-                </div>
-            </article>
-            {{/each}}
-        </section>
-    </section>
+<main class="d-flex flex-column align-items-center w-100 flex-grow-1">
+  <h1 class="bg-success-subtle p-2 text-center text-success w-100">Maxicom Celulares</h1>
+  <section class="m-3 w-100 d-flex flex-column align-items-center">
+    {{#each groupedProducts}}
+      <h2 class="mt-4 text-success">{{@key}}</h2>
+      <div class="d-flex justify-content-evenly flex-wrap align-items-center w-100">
+        {{#each this}}
+        <div class="card" style="width: 18rem; height: 28rem; display: flex; flex-direction: column;">
+          {{#if this.image}}
+          <img src="{{this.image}}" class="card-img-top" alt="{{this.title}}" style="height: 18rem; object-fit: cover;">
+          {{else}}
+          <img src="https://cdn-icons-png.flaticon.com/512/9402/9402212.png" alt="{{this.title}}" style="height: 18rem; object-fit: cover;">
+          {{/if}}
+          <div class="card-body py-1 px-2" style="flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
+            <h5 class="card-title py-1">{{this.title}}</h5>
+            <p class="card-text">USD{{this.price}}</p>
+            <a href="/product/{{this._id}}" class="btn btn-success py-1 px-2">+info</a>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    {{/each}}
+  </section>
 </main>
 <script src="./index.js"></script>

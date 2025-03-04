@@ -1,20 +1,34 @@
 // import productsManager from "../data/fs/products.fs.js";
 import productsManager from "../data/mongo/products.mongo.js";
+import usersManager from "../data/mongo/users.mongo.js";
+import cartsManager from "../data/mongo/carts.mongo.js";
 import mongoose from 'mongoose';
 
 
 const indexView = async (req, res, next) => {
   try {
     const all = await productsManager.readAll();
+
+    const groupedProducts = all.reduce((acc, product) => {
+      if (!acc[product.category]) {
+        acc[product.category] = [];
+      }
+      acc[product.category].push(product);
+      return acc;
+    }, {});
+
     const data = {
       title: "Home",
-      products: all,
+      groupedProducts,
     };
+
     return res.status(200).render("index", data);
   } catch (error) {
     next(error);
   }
 };
+
+
 
 const productView = async (req, res, next) => {
   try {
@@ -39,16 +53,21 @@ const productView = async (req, res, next) => {
     next(error);
   }
 };
-const cartView = (req, res, next) => {
+const cartView = async (req, res, next) => {
   try {
-    const data = {
-      title: "Cart",
-    };
-    return res.status(200).render("cart", data);
+    const { user_id } = req.params;
+
+    const carts = await cartsManager.readProductsFromUser(user_id) || [];
+    const total = await cartsManager.totalToPay(user_id);
+
+    const totalAmount = total && total.length > 0 ? total[0].total : 0;
+
+    return res.status(200).render("cart", { title: "CART", carts, total: totalAmount });
   } catch (error) {
     next(error);
   }
 };
+
 
 const registerView = (req, res, next) => {
   try {
@@ -61,15 +80,36 @@ const registerView = (req, res, next) => {
   }
 };
 
-const profileView = (req, res, next) => {
+const registerUser = (req, res, next) => {
   try {
     const data = {
-      title: "Profile",
+      title: "User Register",
     };
-    return res.status(200).render("profile", data);
+    return res.status(200).render("userRegister", data);
   } catch (error) {
     next(error);
   }
 };
 
-export { indexView, productView, cartView, registerView ,profileView };
+const loginView = (req, res, next) => {
+  try {
+    const data = {
+      title: "Login",
+    };
+    return res.status(200).render("login", data);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const profileView = async (req, res, next) => {
+  try {
+    const { user_id } = req.params;
+    const profile = await usersManager.readById(user_id);
+    return res.status(200).render("profile", { title: "PROFILE", profile });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export { indexView, productView, cartView, registerView, registerUser ,loginView, profileView };

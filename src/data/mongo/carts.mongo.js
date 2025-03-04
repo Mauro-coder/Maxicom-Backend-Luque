@@ -6,7 +6,7 @@ class CartsManager extends Manager {
   constructor() {
     super(Cart);
   }
-  addProductToCart = async (user_id, product_id, quantity) => {
+  addProductToCart = async (product_id, user_id, quantity) => {
     try {
       const one = await this.create({ product_id, user_id, quantity });
       return one;
@@ -16,7 +16,7 @@ class CartsManager extends Manager {
   };
   readProductsFromUser = async (user_id) => {
     try {
-      const all = await this.read({ user_id, state: "reserved" });
+      const all = await this.readAll({ user_id, state: "reserved" });
       return all;
     } catch (error) {
       throw error;
@@ -38,38 +38,38 @@ class CartsManager extends Manager {
       throw error;
     }
   };
-  totalToPay = async(uid) =>{
+  totalToPay = async (user_id) => {
     try {
       const pipeline = [
-        {$match: {user_id: new Types.ObjectId(uid)}},
-        { $lookup: {from: "products", localField: "product_id", foreignField: "_id", as: "product" } },
+        { $match: { user_id: new Types.ObjectId(user_id) } },
+        { $lookup: { from: "products", localField: "product_id", foreignField: "_id", as: "product" } },
         { $unwind: "$product" },
-        { $lookup: {from: "users", localField: "user_id", foreignField: "_id", as: "user" } },
+        { $lookup: { from: "users", localField: "user_id", foreignField: "_id", as: "user" } },
         { $unwind: "$user" },
         { $addFields: {
-          subtotal: {$multiply: ["$product.price", "$quantity"]}
-        } },
+          subtotal: { $multiply: ["$product.price","$quantity"]}
+        }},
         { $group: {
           _id: "$user_id",
-          email: { $first: "$user.email"},
-          products:{
+          email: { $first: "$user.email" },
+          products: {
             $push: {
-               title: "$product.title",
-               price: "$product.price",
-               quantity: "$quantity",
-               subtotal: "$subtotal",
+              title: "$product.title",
+              price: "$product.price",
+              quantity: "$quantity",
+              subtotal: "$subtotal"
             }
           },
           total: { $sum: "$subtotal"}
-        } },
-        { $group: { _id: 0} }
+        }},
+        { $project: { _id: 0 }}
       ];
-      const total = await this.model.aggregate(pipeline)
-      return total
+      const total = await this.model.aggregate(pipeline);
+      return total;
     } catch (error) {
-      throw error
+      throw error;
     }
-  }
+  };
 }
 
 

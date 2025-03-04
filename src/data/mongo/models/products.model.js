@@ -5,7 +5,7 @@ const collection = "products";
 const schema = new Schema(
   {
     title: { type: String, required: true, index: true },
-    category: { type: String, default: "none", index: true },
+    category: { type: String, default: "None",enum: ["Smartphones", "Accesories", "Smartwatches","Headphones","Gaming", "Peripherals", "None"], index: true },
     stock: { type: Number, default: 100 },
     price: { type: Number, default: 300 },
     image: {
@@ -16,6 +16,7 @@ const schema = new Schema(
   },
   { timestamps: true }
 );
+schema.plugin(mongoosePaginate)
 
 
 const Product = model(collection, schema);

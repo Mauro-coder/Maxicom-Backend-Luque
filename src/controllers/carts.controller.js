@@ -2,13 +2,13 @@ import cartsManager from "../data/mongo/carts.mongo.js";
 
 const addProductToCart = async (req, res, next) => {
   try {
-    const { user_id, product_id, quantity } = req.body;
+    const { product_id, user_id, quantity } = req.body;
     const one = await cartsManager.addProductToCart(
-      user_id,
       product_id,
+      user_id,
       quantity
     );
-    return res.status(201).json({
+    res.status(201).json({
       method: req.method,
       url: req.url,
       response: one,
@@ -20,7 +20,7 @@ const addProductToCart = async (req, res, next) => {
 const readProductsFromUser = async (req, res, next) => {
   try {
     const { user_id } = req.params;
-    const all = await cartsManager.readProductsByUser(user_id);
+    const all = await cartsManager.readProductsFromUser(user_id);
     if (all.length > 0) {
       return res.status(200).json({
         method: req.method,
@@ -28,7 +28,7 @@ const readProductsFromUser = async (req, res, next) => {
         response: all,
       });
     }
-    const error = new Error("Not found");
+    const error = new Error("Not Found!");
     error.statusCode = 404;
     throw error;
   } catch (error) {
@@ -38,7 +38,7 @@ const readProductsFromUser = async (req, res, next) => {
 const updateQuantity = async (req, res, next) => {
   try {
     const { cart_id } = req.params;
-    const quantity = req.body;
+    const {quantity} = req.body;
     const one = await cartsManager.updateQuantity(cart_id, quantity);
     if (one) {
       return res.status(200).json({

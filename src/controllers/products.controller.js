@@ -64,8 +64,9 @@ const destroyProduct = async (req, res, next) => {
 
 const paginate = async (req, res, next) => {
   try {
-    const all = await productsManager.paginate()
-    return res.status(200).json({ response: all });
+    const { page = 1, limit= 5 } = req.query
+    const {docs, prevPage, nextPage} = await productsManager.paginate(page, limit)
+    return res.status(200).json({ response: {docs, prevPage, nextPage} });
   } catch (error) {
     next(error)
   }

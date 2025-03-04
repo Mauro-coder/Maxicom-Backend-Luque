@@ -42,38 +42,39 @@ class Manager {
   updateById = async (id, data) => {
     try {
       const opts = { new: true };
-      const one = await this.model.findByIdAndUpdate(id, data, opts);
+      const one = await this.model.findOneAndUpdate({ _id: id }, data, opts);
+      return one;
     } catch (error) {
       throw error;
     }
   };
-  updateOne = async (filter, data) => {
-    try {
-      const opts = { new: true };
-      const one = await this.model.findOneAndUpdate(filter, data, opts);
-    } catch (error) {
-      throw error;
-    }
-  };
+  // updateOne = async (filter, data) => {
+  //   try {
+  //     const opts = { new: true };
+  //     const one = await this.model.findOneAndUpdate(filter, data, opts);
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // };
   destroyById = async (id) => {
     try {
-      const one = await this.model.findByIdAndDelete(id);
+      const one = await this.model.findOneAndDelete({ _id: id });
       return one;
     } catch (error) {
       throw error;
     }
   };
-  destroyOne = async (filter) => {
+  // destroyOne = async (filter) => {
+  //   try {
+  //     const one = await this.model.findOneAndDelete(filter);
+  //     return one;
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // };
+  paginate = async(page, limit)=> {
     try {
-      const one = await this.model.findOneAndDelete(filter);
-      return one;
-    } catch (error) {
-      throw error;
-    }
-  };
-  paginate = async(page, number)=> {
-    try {
-      const all = await this.model.paginate()
+      const all = await this.model.paginate({}, {page, limit})
       return all
     } catch (error) {
       throw error
