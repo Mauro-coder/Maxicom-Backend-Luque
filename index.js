@@ -10,6 +10,7 @@ import router from "./src/routers/index.router.js";
 import pathHandler from "./src/middlewares/pathHandler.mid.js";
 import errorHandler from "./src/middlewares/errorHandler.mid.js";
 import socketHelper from "./src/helpers/socket.helper.js";
+import cookieParser from "cookie-parser";
 
 /* express server settings */
 const server = express();
@@ -38,6 +39,7 @@ server.use(express.static("public"));
 server.use("/assets", express.static("assets"));
 server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
+server.use(cookieParser());
 
 /* router */
 server.use("/", router);

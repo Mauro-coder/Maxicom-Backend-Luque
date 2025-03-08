@@ -15,10 +15,10 @@ document.querySelector("#login").addEventListener("click", async () => {
     if (response.error) {
       alert(response.error);
     } else {
-      // Guardar tanto el user_id como el role en localStorage
+
       localStorage.setItem("user_id", response.response.user_id);
-      localStorage.setItem("user_role", response.response.role);  // Aquí guardamos el rol
-      location.replace("/");  // Redirigir al home
+      localStorage.setItem("user_role", response.response.role);
+      location.replace("/");
     }
   } catch (error) {
     alert(error.error);
