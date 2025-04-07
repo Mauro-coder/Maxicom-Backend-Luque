@@ -2,8 +2,7 @@
 import productsManager from "../data/mongo/products.mongo.js";
 import usersManager from "../data/mongo/users.mongo.js";
 import cartsManager from "../data/mongo/carts.mongo.js";
-import mongoose from 'mongoose';
-
+import mongoose from "mongoose";
 
 const indexView = async (req, res, next) => {
   try {
@@ -27,8 +26,6 @@ const indexView = async (req, res, next) => {
     next(error);
   }
 };
-
-
 
 const productView = async (req, res, next) => {
   try {
@@ -57,17 +54,18 @@ const cartView = async (req, res, next) => {
   try {
     const { user_id } = req.params;
 
-    const carts = await cartsManager.readProductsFromUser(user_id) || [];
+    const carts = (await cartsManager.readProductsFromUser(user_id)) || [];
     const total = await cartsManager.totalToPay(user_id);
 
     const totalAmount = total && total.length > 0 ? total[0].total : 0;
 
-    return res.status(200).render("cart", { title: "CART", carts, total: totalAmount });
+    return res
+      .status(200)
+      .render("cart", { title: "CART", carts, total: totalAmount });
   } catch (error) {
     next(error);
   }
 };
-
 
 const registerView = (req, res, next) => {
   try {
@@ -94,7 +92,7 @@ const registerUser = (req, res, next) => {
 const loginView = (req, res, next) => {
   try {
     const data = {
-      title: "Login",
+      title: "Login Form",
     };
     return res.status(200).render("login", data);
   } catch (error) {
@@ -112,4 +110,12 @@ const profileView = async (req, res, next) => {
   }
 };
 
-export { indexView, productView, cartView, registerView, registerUser ,loginView, profileView };
+export {
+  indexView,
+  productView,
+  cartView,
+  registerView,
+  registerUser,
+  loginView,
+  profileView,
+};

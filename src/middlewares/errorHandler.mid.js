@@ -1,13 +1,11 @@
 const errorHandler = (error, req, res, next) => {
   console.log(error);
-  const status = error.statusCode || 500;
-  const message = error.message || "API ERROR";
-  const data = {
-    method: req.method,
-    url: req.url,
+  const message = error.message || "Server Error";
+  const statusCode = error.statusCode || 500;
+  res.status(statusCode).json({
     error: message,
-  };
-  return res.status(status).json(data);
+    method: req.method,
+    url: req.originalUrl,
+  });
 };
-
 export default errorHandler;

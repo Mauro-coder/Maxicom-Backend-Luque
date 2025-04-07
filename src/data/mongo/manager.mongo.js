@@ -20,6 +20,7 @@ class Manager {
       throw error;
     }
   };
+
   readById = async (id) => {
     try {
       const one = await this.model.findById(id).lean();

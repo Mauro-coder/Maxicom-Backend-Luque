@@ -7,7 +7,7 @@ const schema = new Schema(
     age: { type: Number },
     email: { type: String, required: true, unique: true, index: true },
     password: { type: String, required: true },
-    role: { type: String, default: "user", enum: ["user", "admin", "master"], index: true },
+    role: { type: String, default: "user", enum: ["user", "admin", "prem"], index: true },
     avatar: {
       type: String,
       default:

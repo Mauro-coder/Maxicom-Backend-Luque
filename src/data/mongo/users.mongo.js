@@ -9,7 +9,7 @@ class UsersManager extends Manager {
   login = async (email, password) => {
     try {
       const one = await this.model.findOne({ email, password }).lean();
-      return one;  // Asegúrate de que 'one' contiene el campo 'role'
+      return one;
     } catch (error) {
       throw error;
     }
