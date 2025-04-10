@@ -5,6 +5,8 @@ import express from "express";
 import morgan from "morgan";
 import { engine } from "express-handlebars";
 import sessions from "express-session";
+//import sessionFileStore from "session-file-store";
+import MongoStore from "connect-mongo";
 import cookieParser from "cookie-parser";
 import __dirname from "./utils.js";
 import connectMongo from "./src/helpers/mongo.helper.js";
@@ -40,12 +42,15 @@ server.use("/assets", express.static("assets"));
 server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
 server.use(cookieParser(process.env.COOKIE_KEY));
+//const FileStore = sessionFileStore(sessions)
+
 server.use(
   sessions({
     secret: process.env.SESSION_KEY,
     resave: true,
     saveUninitialized: true,
-    cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 },
+    //store: new FileStore({ ttl: 7*24*60*60, retries: 4, path: "./src/data/sessions"}),
+    store: new MongoStore({ ttl: 7 * 24 * 60 * 60, mongoUrl: process.env.MONGO_URL }),
   })
 );
 
