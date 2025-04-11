@@ -15,7 +15,7 @@ const schema = new Schema(
         "https://icon-library.com/images/products-icon/products-icon-8.jpg",
     },
     onsale: { type: Boolean, default: false },
-    owner_id: { type: Types.ObjectId, ref: "users", required: true, index: true },
+    owner_id: { type: Types.ObjectId, ref: "users", index: true },
   },
   { timestamps: true }
 );

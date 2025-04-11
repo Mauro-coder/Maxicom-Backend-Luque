@@ -100,15 +100,13 @@ const loginView = (req, res, next) => {
   }
 };
 
-const profileView = async (req, res, next) => {
+const profileView = (req, res) => {
   try {
-    const { user_id } = req.params;
-    const profile = await usersManager.readById(user_id);
-    return res.status(200).render("profile", { title: "PROFILE", profile });
+    res.status(200).render("profile");
   } catch (error) {
-    next(error);
+    res.status(500).render("error");
   }
-};
+}
 
 export {
   indexView,

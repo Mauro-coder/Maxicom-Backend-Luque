@@ -1,7 +1,12 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
+import { Strategy as GoogleStrategy } from "passport-google-oauth2";
 import usersManager from "../data/mongo/users.mongo.js";
 import { createHash, verifyHash } from "../helpers/hash.helper.js";
+import { createToken } from "../helpers/token.helper.js";
+const clientID = process.env.GOOGLE_ID;
+const clientSecret = process.env.GOOGLE_SECRET;
+const callbackURL = "http://localhost:8080/api/auth/google/callback";
 
 passport.use(
   "register",
@@ -66,10 +71,13 @@ passport.use(
           error.statusCode = 401;
           throw error;
         }
-        /* lo dejamos provisionalmente porque NO VAMOS A MANEJAR SESIONES CON PASSPORT */
-        req.session.user_id = response._id;
-        req.session.email = email;
-        req.session.role = response.role;
+        const data = {
+          user_id: response._id,
+          email: response.email,
+          role: response.role,
+        };
+        const token = createToken(data)
+        req.token = token;
         /* el segundo parametro del done agrega al objeto de requerimientos */
         /* una propiedad user con los datos del usuario */
         done(null, response);
@@ -79,5 +87,29 @@ passport.use(
     }
   )
 );
-
+passport.use(
+  "google",
+  new GoogleStrategy(
+    { clientID, clientSecret, callbackURL },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        const email = profile.id;
+        let user = await usersManager.readOne({ email });
+        if (!user) {
+          user = {
+            name: profile.name.givenName,
+            avatar: profile.picture,
+            email: profile.id,
+            password: createHash(profile.id),
+            city: "rafaela"
+          };
+          user = await usersManager.create(user);
+        }
+        done(null, user);
+      } catch (error) {
+        done(error);
+      }
+    }
+  )
+);
 export default passport;

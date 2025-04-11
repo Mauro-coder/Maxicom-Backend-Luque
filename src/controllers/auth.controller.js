@@ -16,25 +16,27 @@ const register = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   try {
-    /* passport done(null, response) agrega al objeto req, la propiedad user */
-    /* con los datos correspondientes del usuario */
-    const response = req.user;
+    const user = req.user;
+    const token = req.token;
     res.status(200).json({
-      response,
-      method: req.method,
-      url: req.originalUrl,
+      token,
+      user: {
+        _id: user._id,
+        role: user.role,
+      },
     });
   } catch (error) {
     next(error);
   }
 };
 
+
 const online = async (req, res, next) => {
   try {
-    if (req.session.user_id) {
+    if (req.user_id) {
       res.status(200).json({
-        user_id: req.session.user_id,
-        user_role: req.session.role,
+        user_id: req.user_id,
+        user_role: req.role,
         method: req.method,
         url: req.originalUrl,
       });
@@ -50,7 +52,6 @@ const online = async (req, res, next) => {
 
 const signout = async (req, res, next) => {
   try {
-    req.session.destroy();
     res.status(200).json({
       message: "Signed out",
       method: req.method,
@@ -60,6 +61,7 @@ const signout = async (req, res, next) => {
     next(error);
   }
 };
+
 const badAuth = async (req, res, next) => {
   try {
     const error = new Error("Bad auth from redirect");
@@ -69,4 +71,17 @@ const badAuth = async (req, res, next) => {
     next(error);
   }
 };
-export { register, login, online, signout, badAuth,};
+const google = async (req, res, next)=>{
+  try {
+    const response = req.user;
+    res.status(200).json({
+      response,
+      method: req.method,
+      url: req.originalUrl,
+    });
+  } catch (error) {
+    next(error)
+  }
+}
+
+export { register, login, online, signout, badAuth, google};
