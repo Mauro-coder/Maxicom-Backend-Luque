@@ -15,7 +15,7 @@ viewsRouter.get("/", indexView);
 viewsRouter.get("/register", registerView);
 viewsRouter.get("/registeruser", registerUser);
 viewsRouter.get("/login", loginView);
-viewsRouter.get("/profile", profileView);
+viewsRouter.get("/profile/:user_id", profileView);
 viewsRouter.get("/product/:pid", productView);
 viewsRouter.get("/cart/:user_id", cartView);
 

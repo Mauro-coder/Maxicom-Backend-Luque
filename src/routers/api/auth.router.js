@@ -46,4 +46,18 @@ authRouter.get(
   }),
   google
 );
+authRouter.get("/profile", isUser, async (req, res, next) => {
+  try {
+    const { user } = req;
+    const profile = {
+      name: user.name,
+      email: user.email,
+      avatar: user.avatar,
+    };
+    return res.status(200).json({ response: profile });
+  } catch (error) {
+    next(error);
+  }
+});
+
 export default authRouter;
