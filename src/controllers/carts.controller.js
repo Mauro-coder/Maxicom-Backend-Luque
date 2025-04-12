@@ -2,59 +2,37 @@ import cartsManager from "../data/mongo/carts.mongo.js";
 
 const addProductToCart = async (req, res, next) => {
     const { product_id, user_id, quantity } = req.body;
-    const one = await cartsManager.addProductToCart(
+    const response = await cartsManager.addProductToCart(
       product_id,
       user_id,
       quantity
     );
-    res.status(201).json({
-      method: req.method,
-      url: req.url,
-      response: one,
-    });
+    res.json201(response)
 };
 const readProductsFromUser = async (req, res, next) => {
     const { user_id } = req.params;
     const all = await cartsManager.readProductsFromUser(user_id);
-    if (all.length > 0) {
-      return res.status(200).json({
-        method: req.method,
-        url: req.url,
-        response: all,
-      });
+    if (all.length === 0) {
+      res.json404()
     }
-    const error = new Error("Not Found!");
-    error.statusCode = 404;
-    throw error;
+    res.json200(all)
 };
 const updateQuantity = async (req, res, next) => {
     const { cart_id } = req.params;
     const {quantity} = req.body;
     const one = await cartsManager.updateQuantity(cart_id, quantity);
-    if (one) {
-      return res.status(200).json({
-        method: req.method,
-        url: req.url,
-        response: one,
-      });
+    if (!one) {
+      res.json404()
     }
-    const error = new Error("Not found");
-    error.statusCode = 404;
-    throw error;
+    res.json200(one)
 };
 const removeProductFromCart = async (req, res, next) => {
     const { cart_id } = req.params;
     const one = await cartsManager.removeProductFromCart(cart_id);
-    if (one) {
-      return res.status(200).json({
-        method: req.method,
-        url: req.url,
-        response: one,
-      });
+    if (!one) {
+      res.json404()
     }
-    const error = new Error("Not found");
-    error.statusCode = 404;
-    throw error;
+    res.json200(one)
 };
 const totalToPay = async (req, res, next) => {
     const { user_id } = req.params;

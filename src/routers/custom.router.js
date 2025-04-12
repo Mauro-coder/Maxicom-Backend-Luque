@@ -1,8 +1,10 @@
 import { Router } from "express";
+import setupResponses from "../middlewares/setupResponses.mid.js"
 
 class CustomRouter {
   constructor() {
     this.router = Router();
+    this.use(setupResponses)
   }
   getRouter = () => this.router;
   applyMiddlewares = (cbs) => {
