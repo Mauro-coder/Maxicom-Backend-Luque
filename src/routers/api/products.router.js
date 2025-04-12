@@ -8,16 +8,37 @@ import {
   paginate,
 } from "../../controllers/products.controller.js";
 import isValidProduct from "../../middlewares/isValidProduct.mid.js";
-import isAdmin from "../../middlewares/isAdmin.mid.js";
+import passport from "../../middlewares/passport.mid.js";
 
 const productsRouter = Router();
 
-
 productsRouter.get("/", readProducts);
-productsRouter.post("/", isAdmin, isValidProduct, createProduct);
+productsRouter.post(
+  "/",
+  passport.authenticate("admin", {
+    session: false,
+    failureRedirect: "/api/auth/bad-auth",
+  }),
+  isValidProduct,
+  createProduct
+);
 productsRouter.get("/pages", paginate);
 productsRouter.get("/:pid", readOneProduct);
-productsRouter.put("/:pid", updateProduct);
-productsRouter.delete("/:pid", isAdmin, destroyProduct);
+productsRouter.put(
+  "/:pid",
+  passport.authenticate("admin", {
+    session: false,
+    failureRedirect: "/api/auth/bad-auth",
+  }),
+  updateProduct
+);
+productsRouter.delete(
+  "/:pid",
+  passport.authenticate("admin", {
+    session: false,
+    failureRedirect: "/api/auth/bad-auth",
+  }),
+  destroyProduct
+);
 
 export default productsRouter;

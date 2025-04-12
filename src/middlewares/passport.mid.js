@@ -1,44 +1,42 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as GoogleStrategy } from "passport-google-oauth2";
+import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
 import usersManager from "../data/mongo/users.mongo.js";
 import { createHash, verifyHash } from "../helpers/hash.helper.js";
 import { createToken } from "../helpers/token.helper.js";
-const clientID = process.env.GOOGLE_ID;
-const clientSecret = process.env.GOOGLE_SECRET;
+const {
+  SECRET,
+  GOOGLE_ID: clientID,
+  GOGGLE_SECRET: clientSecret,
+} = process.env;
 const callbackURL = "http://localhost:8080/api/auth/google/callback";
 
 passport.use(
   "register",
   new LocalStrategy(
-    /* objeto de configuración de la estrategia */
     { passReqToCallback: true, usernameField: "email" },
-    /* callback de la estrategia (lógica de autenticación/autorizacion) */
     async (req, email, password, done) => {
       try {
-        /* la lógica del register está actualmente en la ruta del register */
-        /* para mayor ordenamiento de la autenticación */
-        /* esa lógica se viene para la estrategia */
         const data = req.body;
-        /* validar propiedades obligatorias */
         if (!data.city) {
-          const error = new Error("Invalid data");
-          error.statusCode = 400;
-          throw error;
+          //const error = new Error("Invalid data");
+          //error.statusCode = 400;
+          //throw error;
+          return done(null, null, { message: "Invalid data", statusCode: 400 });
         }
-        /* validar el no re-registro del usuario */
         const user = await usersManager.readOne({ email });
         if (user) {
-          const error = new Error("Invalid credentials");
-          error.statusCode = 401;
-          throw error;
+          // const error = new Error("Invalid credentials");
+          // error.statusCode = 401;
+          // throw error;
+          return done(null, null, {
+            message: "Invalid credentials",
+            statusCode: 401,
+          });
         }
-        /* proteger la contraseña */
         data.password = createHash(password);
-        /* crear al usuario */
         const response = await usersManager.create(data);
-        /* el segundo parametro del done agrega al objeto de requerimientos */
-        /* una propiedad user con los datos del usuario */
         done(null, response);
       } catch (error) {
         done(error);
@@ -49,37 +47,30 @@ passport.use(
 passport.use(
   "login",
   new LocalStrategy(
-    /* objeto de configuración de la estrategia */
     { passReqToCallback: true, usernameField: "email" },
-    /* callback de la estrategia (lógica de autenticación/autorizacion) */
     async (req, email, password, done) => {
       try {
-        /* la lógica del login está actualmente en la ruta del register */
-        /* para mayor ordenamiento de la autenticación */
-        /* esa lógica se viene para la estrategia */
-        /* validar si el usuario existe en la base de datos */
         const response = await usersManager.readOne({ email });
         if (!response) {
-          const error = new Error("Invalid credentials");
-          error.statusCode = 401;
-          throw error;
+          return done(null, null, {
+            message: "Invalid credentials",
+            statusCode: 401,
+          });
         }
-        /* validar la contraseña */
         const verify = verifyHash(password, response.password);
         if (!verify) {
-          const error = new Error("Invalid credentials");
-          error.statusCode = 401;
-          throw error;
+          return done(null, null, {
+            message: "Invalid credentials",
+            statusCode: 401,
+          });
         }
         const data = {
           user_id: response._id,
           email: response.email,
           role: response.role,
         };
-        const token = createToken(data)
+        const token = createToken(data);
         req.token = token;
-        /* el segundo parametro del done agrega al objeto de requerimientos */
-        /* una propiedad user con los datos del usuario */
         done(null, response);
       } catch (error) {
         done(error);
@@ -101,9 +92,63 @@ passport.use(
             avatar: profile.picture,
             email: profile.id,
             password: createHash(profile.id),
-            city: "rafaela"
+            city: "rafaela",
           };
           user = await usersManager.create(user);
+        }
+        done(null, user);
+      } catch (error) {
+        done(error);
+      }
+    }
+  )
+);
+passport.use(
+  "current",
+  new JwtStrategy(
+    {
+      jwtFromRequest: ExtractJwt.fromExtractors([(req) => req?.cookies?.token]),
+      secretOrKey: SECRET,
+    },
+    async (data, done) => {
+      try {
+        const { user_id } = data;
+        const user = await usersManager.readById(user_id);
+        if (!user) {
+          return done(null, null, {
+            message: "Bad auth",
+            statusCode: 401,
+          });
+        }
+        done(null, user);
+      } catch (error) {
+        done(error);
+      }
+    }
+  )
+);
+passport.use(
+  "admin",
+  new JwtStrategy(
+    {
+      jwtFromRequest: ExtractJwt.fromExtractors([(req) => req?.cookies?.token]),
+      secretOrKey: SECRET,
+    },
+    async (data, done) => {
+      try {
+        const { user_id } = data;
+        const user = await usersManager.readById(user_id);
+        if (!user) {
+          return done(null, null, {
+            message: "Bad auth",
+            statusCode: 401,
+          });
+        }
+        if (user.role !== "admin") {
+          return done(null, null, {
+            message: "Forbidden",
+            statusCode: 403,
+          });
         }
         done(null, user);
       } catch (error) {

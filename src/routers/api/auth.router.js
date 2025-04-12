@@ -8,29 +8,31 @@ import {
   google,
 } from "../../controllers/auth.controller.js";
 import passport from "../../middlewares/passport.mid.js";
+import passportCb from "../../middlewares/passportCb.mid.js";
 import isUser from "../../middlewares/isUser.mid.js";
 
 const authRouter = Router();
 
 authRouter.post(
   "/register",
-  passport.authenticate("register", {
-    session: false,
-    failureRedirect: "/api/auth/bad-auth",
-  }),
+  passportCb("register"),
   register
 );
 authRouter.post(
   "/login",
-  passport.authenticate("login", {
-    session: false,
-    failureRedirect: "/api/auth/bad-auth",
-  }),
+  passportCb("login"),
   login
 );
-authRouter.post("/online", isUser, online);
-authRouter.post("/signout", isUser, signout);
-authRouter.get("/bad-auth", badAuth);
+authRouter.post(
+  "/online",
+  passportCb("current"),
+  online
+);
+authRouter.post(
+  "/signout",
+  passportCb("current"),
+  signout
+);
 authRouter.get(
   "/google",
   passport.authenticate("google", {

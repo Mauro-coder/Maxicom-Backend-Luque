@@ -16,14 +16,13 @@ const register = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   try {
-    const user = req.user;
+    const response = req.user;
     const token = req.token;
-    res.status(200).json({
-      token,
-      user: {
-        _id: user._id,
-        role: user.role,
-      },
+    const opts = { maxAge: 60*60*24*7, httpOnly: true }
+    res.cookie("token", token, opts).status(200).json({
+      response,
+      method: req.method,
+      url: req.originalUrl,
     });
   } catch (error) {
     next(error);
@@ -33,10 +32,11 @@ const login = async (req, res, next) => {
 
 const online = async (req, res, next) => {
   try {
-    if (req.user_id) {
+    const user = req.user;
+    if (user?._id) {
       res.status(200).json({
-        user_id: req.user_id,
-        user_role: req.role,
+        user_id: user._id,
+        user_role: user.role,
         method: req.method,
         url: req.originalUrl,
       });
@@ -50,9 +50,10 @@ const online = async (req, res, next) => {
   }
 };
 
+
 const signout = async (req, res, next) => {
   try {
-    res.status(200).json({
+    res.clearCookie("token").status(200).json({
       message: "Signed out",
       method: req.method,
       url: req.originalUrl,
