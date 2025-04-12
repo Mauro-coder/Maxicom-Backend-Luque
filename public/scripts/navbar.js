@@ -8,7 +8,7 @@ const isOnline = async () => {
 
   if (!token) {
     selector.innerHTML = `
-      <a class="btn btn-success py-1 px-2 m-1" href="/register">Register</a>
+      <a class="btn btn-success py-1 px-2 m-1" href="/registeruser">Register</a>
       <a class="btn btn-success py-1 px-2 m-1" href="/login">Login</a>
     `;
     return;

@@ -1,4 +1,4 @@
-import { Router } from "express";
+import CustomRouter from "../custom.router.js";
 import {
   readOneProduct,
   readProducts,
@@ -11,14 +11,22 @@ import {
 import isValidProduct from "../../middlewares/isValidProduct.mid.js";
 import passportCb from "../../middlewares/passportCb.mid.js";
 
-const productsRouter = Router();
+class ProductsRouter extends CustomRouter {
+  constructor() {
+    super();
+    this.init();
+  }
+  init = () => {
+    this.create("/", passportCb("admin"), isValidProduct, createProduct);
+    this.read("/", readProducts);
+    this.read("/pages", paginate);
+    this.read("/:pid", readOneProduct);
+    this.update("/:pid", passportCb("admin"), updateProduct);
+    this.destroy("/:pid", passportCb("admin"), destroyProduct);
+    this.router.param("pid", pidParam);
+  };
+}
 
-productsRouter.param("pid", pidParam)
-productsRouter.get("/", readProducts);
-productsRouter.post("/", passportCb("admin"), isValidProduct, createProduct);
-productsRouter.get("/pages", paginate);
-productsRouter.get("/:pid", readOneProduct);
-productsRouter.put("/:pid", passportCb("admin"), updateProduct);
-productsRouter.delete("/:pid", passportCb("admin"), destroyProduct);
-
+let productsRouter = new ProductsRouter();
+productsRouter = productsRouter.getRouter();
 export default productsRouter;

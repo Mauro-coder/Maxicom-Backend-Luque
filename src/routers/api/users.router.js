@@ -1,4 +1,4 @@
-import { Router } from "express";
+import CustomRouter from "../custom.router.js";
 import {
   createUser,
   readUsers,
@@ -7,12 +7,19 @@ import {
   destroyById,
 } from "../../controllers/users.controller.js";
 
-const usersRouter = Router();
+class UsersRouter extends CustomRouter {
+  constructor() {
+    super();
+    this.init();
+  }
+  init = () => {
+    this.create("/", createUser);
+    this.read("/", readUsers);
+    this.read("/:uid", readById);
+    this.update("/:uid", updateById);
+    this.destroy("/:uid", destroyById);
+  };
+}
 
-usersRouter.post("/", createUser);
-usersRouter.get("/", readUsers);
-usersRouter.get("/:uid", readById);
-usersRouter.put("/:uid", updateById);
-usersRouter.delete("/:uid", destroyById);
-
-export default usersRouter;
+const usersRouter = new UsersRouter()
+export default usersRouter.getRouter();

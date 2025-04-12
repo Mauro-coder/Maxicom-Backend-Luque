@@ -1,4 +1,4 @@
-import { Router } from "express";
+import CustomRouter from "../custom.router.js";
 import {
   addProductToCart,
   readProductsFromUser,
@@ -7,12 +7,31 @@ import {
   totalToPay,
 } from "../../controllers/carts.controller.js";
 
-const cartsRouter = Router();
+class CartsRouter extends CustomRouter {
+  constructor() {
+    super();
+    this.init();
+  }
+  init = () => {
+    this.create("/", addProductToCart);
+    this.read("/users/:user_id", readProductsFromUser);
+    this.update("/:cart_id", updateQuantity);
+    this.destroy("/:cart_id", removeProductFromCart);
+    this.read("/total/:user_id", totalToPay);
+    this.router.param("id", (req, res, next, id) => {
+      try {
+        if (!Types.ObjectId.isValid(id)) {
+          const error = new Error("Invalid ID");
+          error.statusCode = 400;
+          throw error;
+        }
+        next();
+      } catch (error) {
+        next(error);
+      }
+    });
+  };
+}
 
-cartsRouter.post("/", addProductToCart);
-cartsRouter.get("/users/:user_id", readProductsFromUser);
-cartsRouter.put("/:cart_id", updateQuantity);
-cartsRouter.delete("/:cart_id", removeProductFromCart);
-cartsRouter.get("/total/:user_id", totalToPay);
-
-export default cartsRouter;
+const cartsRouter = new CartsRouter();
+export default cartsRouter.getRouter();

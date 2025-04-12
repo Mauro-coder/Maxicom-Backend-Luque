@@ -1,8 +1,7 @@
 //import usersManager from "../data/fs/users.fs.js";
 import usersManager from "../data/mongo/users.mongo.js";
 
-const createUser = async (req, res, next) => {
-  try {
+const createUser = async (req, res) => {
     const data = req.body;
     if (!data.email) {
       const error = new Error("Type email!");
@@ -30,13 +29,9 @@ const createUser = async (req, res, next) => {
       method: req.method,
       url: req.url,
     });
-  } catch (error) {
-    next(error);
-  }
 };
 
-const readUsers = async (req, res, next) => {
-  try {
+const readUsers = async (req, res) => {
     const filter = req.query;
     const response = await usersManager.readAll(filter);
     if (response.length === 0) {
@@ -49,13 +44,9 @@ const readUsers = async (req, res, next) => {
       method: req.method,
       url: req.originalUrl,
     });
-  } catch (error) {
-    next(error);
-  }
 };
 
-const readById = async (req, res, next) => {
-  try {
+const readById = async (req, res) => {
     const { uid } = req.params;
     const response = await usersManager.readById(uid);
     if (!response) {
@@ -68,13 +59,9 @@ const readById = async (req, res, next) => {
       method: req.method,
       url: req.originalUrl,
     });
-  } catch (error) {
-    next(error);
-  }
 };
 
-const updateById = async (req, res, next) => {
-  try {
+const updateById = async (req, res) => {
     const { uid } = req.params;
     const data = req.body;
     const response = await usersManager.readById(uid);
@@ -89,13 +76,9 @@ const updateById = async (req, res, next) => {
       method: req.method,
       url: req.originalUrl,
     });
-  } catch (error) {
-    next(error);
-  }
 };
 
-const destroyById = async (req, res, next) => {
-  try {
+const destroyById = async (req, res) => {
     const { uid } = req.params;
     const response = await usersManager.destroyById(uid);
     if (!response) {
@@ -109,9 +92,6 @@ const destroyById = async (req, res, next) => {
       method: req.method,
       url: req.originalUrl,
     });
-  } catch (error) {
-    next(error);
-  }
 };
 
 

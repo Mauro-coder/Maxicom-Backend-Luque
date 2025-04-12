@@ -7,7 +7,8 @@ document.querySelector("#register").addEventListener("click", async () => {
       age: document.querySelector("#age").value,
       email: document.querySelector("#email").value,
       password: document.querySelector("#password").value,
-    };
+      city: document.querySelector("#city").value,
+    };    
     const opts = {
       method: "POST",
       headers: { "Content-Type": "application/json" },

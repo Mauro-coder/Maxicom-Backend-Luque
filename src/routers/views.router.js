@@ -1,4 +1,4 @@
-import { Router } from "express";
+import CustomRouter from "./custom.router.js";
 import {
   indexView,
   productView,
@@ -9,14 +9,22 @@ import {
   loginView,
 } from "../controllers/views.controller.js";
 
-const viewsRouter = Router();
+class ViewsRouter extends CustomRouter {
+  constructor() {
+    super();
+    this.init();
+  }
+  init = () => {
+    this.read("/", indexView);
+    this.read("/register", registerView);
+    this.read("/registeruser", registerUser);
+    this.read("/login", loginView);
+    this.read("/profile/:user_id", profileView);
+    this.read("/product/:pid", productView);
+    this.read("/cart/:user_id", cartView);
+  };
+}
 
-viewsRouter.get("/", indexView);
-viewsRouter.get("/register", registerView);
-viewsRouter.get("/registeruser", registerUser);
-viewsRouter.get("/login", loginView);
-viewsRouter.get("/profile/:user_id", profileView);
-viewsRouter.get("/product/:pid", productView);
-viewsRouter.get("/cart/:user_id", cartView);
 
-export default viewsRouter;
+const viewsRouter = new ViewsRouter()
+export default viewsRouter.getRouter();

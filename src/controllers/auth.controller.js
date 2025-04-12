@@ -1,21 +1,14 @@
 import usersManager from "../data/mongo/users.mongo.js";
 
-const register = async (req, res, next) => {
-  try {
+const register = async (req, res) => {
     const userCreated = req.user;
     res.status(201).json({
       response: userCreated,
       method: req.method,
       url: req.url,
     });
-  } catch (error) {
-    next(error);
-  }
 };
-
-
-const login = async (req, res, next) => {
-  try {
+const login = async (req, res) => {
     const response = req.user;
     const token = req.token;
     const opts = { maxAge: 60*60*24*7, httpOnly: true }
@@ -24,14 +17,8 @@ const login = async (req, res, next) => {
       method: req.method,
       url: req.originalUrl,
     });
-  } catch (error) {
-    next(error);
-  }
 };
-
-
-const online = async (req, res, next) => {
-  try {
+const online = async (req, res) => {
     const user = req.user;
     if (user?._id) {
       res.status(200).json({
@@ -45,44 +32,26 @@ const online = async (req, res, next) => {
       error.statusCode = 401;
       throw error;
     }
-  } catch (error) {
-    next(error);
-  }
 };
-
-
-const signout = async (req, res, next) => {
-  try {
+const signout = async (req, res) => {
     res.clearCookie("token").status(200).json({
       message: "Signed out",
       method: req.method,
       url: req.originalUrl,
     });
-  } catch (error) {
-    next(error);
-  }
 };
-
-const badAuth = async (req, res, next) => {
-  try {
+const badAuth = async (req, res) => {
     const error = new Error("Bad auth from redirect");
     error.statusCode = 401;
     throw error;
-  } catch (error) {
-    next(error);
-  }
 };
-const google = async (req, res, next)=>{
-  try {
+const google = async (req, res)=>{
     const response = req.user;
     res.status(200).json({
       response,
       method: req.method,
       url: req.originalUrl,
     });
-  } catch (error) {
-    next(error)
-  }
 }
 
 export { register, login, online, signout, badAuth, google};
