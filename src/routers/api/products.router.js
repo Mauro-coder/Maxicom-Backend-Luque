@@ -6,39 +6,19 @@ import {
   updateProduct,
   destroyProduct,
   paginate,
+  pidParam,
 } from "../../controllers/products.controller.js";
 import isValidProduct from "../../middlewares/isValidProduct.mid.js";
-import passport from "../../middlewares/passport.mid.js";
+import passportCb from "../../middlewares/passportCb.mid.js";
 
 const productsRouter = Router();
 
+productsRouter.param("pid", pidParam)
 productsRouter.get("/", readProducts);
-productsRouter.post(
-  "/",
-  passport.authenticate("admin", {
-    session: false,
-    failureRedirect: "/api/auth/bad-auth",
-  }),
-  isValidProduct,
-  createProduct
-);
+productsRouter.post("/", passportCb("admin"), isValidProduct, createProduct);
 productsRouter.get("/pages", paginate);
 productsRouter.get("/:pid", readOneProduct);
-productsRouter.put(
-  "/:pid",
-  passport.authenticate("admin", {
-    session: false,
-    failureRedirect: "/api/auth/bad-auth",
-  }),
-  updateProduct
-);
-productsRouter.delete(
-  "/:pid",
-  passport.authenticate("admin", {
-    session: false,
-    failureRedirect: "/api/auth/bad-auth",
-  }),
-  destroyProduct
-);
+productsRouter.put("/:pid", passportCb("admin"), updateProduct);
+productsRouter.delete("/:pid", passportCb("admin"), destroyProduct);
 
 export default productsRouter;
