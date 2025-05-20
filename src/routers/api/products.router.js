@@ -17,12 +17,12 @@ class ProductsRouter extends CustomRouter {
     this.init();
   }
   init = () => {
-    this.create("/", passportCb("admin"), isValidProduct, createProduct);
-    this.read("/", readProducts);
-    this.read("/pages", paginate);
-    this.read("/:pid", readOneProduct);
-    this.update("/:pid", passportCb("admin"), updateProduct);
-    this.destroy("/:pid", passportCb("admin"), destroyProduct);
+    this.create("/", ["ADMIN"], isValidProduct, createProduct);
+    this.read("/", ["PUBLIC"], readProducts);
+    this.read("/pages", ["PUBLIC"], paginate);
+    this.read("/:pid", ["PUBLIC"], readOneProduct);
+    this.update("/:pid", ["ADMIN"], updateProduct);
+    this.destroy("/:pid", ["ADMIN"], destroyProduct);
     this.router.param("pid", pidParam);
   };
 }

@@ -4,7 +4,7 @@ import usersManager from "./data/fs/users.fs.js"
 
 async function router(req, res) {
   const { url } = req;
-  const type = { "Contet-Type": "application/json" };
+  const type = { "Content-Type": "application/json" };
   try {
     switch (url) {
       case "/":

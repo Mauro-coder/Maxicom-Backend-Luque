@@ -9,36 +9,21 @@ import {
 } from "../../controllers/auth.controller.js";
 import passport from "../../middlewares/passport.mid.js";
 import passportCb from "../../middlewares/passportCb.mid.js";
-import isUser from "../../middlewares/isUser.mid.js";
 
 class AuthRouter extends CustomRouter {
   constructor() {
-    super()
-    this.init()
+    super();
+    this.init();
   }
-  init =()=> {
-    this.create(
-      "/register",
-      passportCb("register"),
-      register
-    );
-    this.create(
-      "/login",
-      passportCb("login"),
-      login
-    );
-    this.create(
-      "/online",
-      passportCb("current"),
-      online
-    );
-    this.create(
-      "/signout",
-      passportCb("current"),
-      signout
-    );
+  init = () => {
+    this.create("/register", ["PUBLIC"], passportCb("register"), register);
+    this.create("/login", ["PUBLIC"], passportCb("login"), login);
+    this.create("/online", ["USER", "ADMIN"], online);
+    this.create("/signout", ["USER", "ADMIN"], signout);
+    this.read("/bad-auth", ["PUBLIC"], badAuth);
     this.read(
       "/google",
+      ["PUBLIC"],
       passport.authenticate("google", {
         scope: ["email", "profile"],
         failureRedirect: "/api/auth/bad-auth",
@@ -46,28 +31,16 @@ class AuthRouter extends CustomRouter {
     );
     this.read(
       "/google/callback",
+      ["PUBLIC"],
       passport.authenticate("google", {
         session: false,
         failureRedirect: "/api/auth/bad-auth",
       }),
       google
     );
-    this.read("/profile", isUser, async (req, res, next) => {
-      try {
-        const { user } = req;
-        const profile = {
-          name: user.name,
-          email: user.email,
-          avatar: user.avatar,
-        };
-        return res.status(200).json({ response: profile });
-      } catch (error) {
-        next(error);
-      }
-    });
-  }
+
+  };
 }
 
-
-const authRouter = new AuthRouter()
+const authRouter = new AuthRouter();
 export default authRouter.getRouter();

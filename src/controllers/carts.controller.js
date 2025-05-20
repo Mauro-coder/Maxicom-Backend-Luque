@@ -26,6 +26,18 @@ const updateQuantity = async (req, res, next) => {
     }
     res.json200(one)
 };
+const updateState = async (req, res) => {
+  const { id, state } = req.params;
+  const states = ["reserved", "paid", "delivered"];
+  if (states.includes(state)) {
+    const one = await cartsManager.updateState(id, state);
+    if (one) {
+      return res.json200(one);
+    }
+    res.json404();
+  }
+  res.json400("Invalid state!");
+};
 const removeProductFromCart = async (req, res, next) => {
     const { cart_id } = req.params;
     const one = await cartsManager.removeProductFromCart(cart_id);
@@ -47,6 +59,7 @@ export {
   addProductToCart,
   readProductsFromUser,
   updateQuantity,
+  updateState,
   removeProductFromCart,
   totalToPay,
 };

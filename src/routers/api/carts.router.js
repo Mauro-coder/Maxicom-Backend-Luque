@@ -3,6 +3,7 @@ import {
   addProductToCart,
   readProductsFromUser,
   updateQuantity,
+  updateState,
   removeProductFromCart,
   totalToPay,
 } from "../../controllers/carts.controller.js";
@@ -13,11 +14,12 @@ class CartsRouter extends CustomRouter {
     this.init();
   }
   init = () => {
-    this.create("/", addProductToCart);
-    this.read("/users/:user_id", readProductsFromUser);
-    this.update("/:cart_id", updateQuantity);
-    this.destroy("/:cart_id", removeProductFromCart);
-    this.read("/total/:user_id", totalToPay);
+    this.create("/", ["USER"], addProductToCart);
+    this.read("/users/:user_id", ["USER"], readProductsFromUser);
+    this.update("/:cart_id", ["USER"], updateQuantity);
+    this.update("/:id/:state", ["USER"], updateState);
+    this.destroy("/:cart_id", ["USER"], removeProductFromCart);
+    this.read("/total/:user_id", ["USER"], totalToPay);
     this.router.param("id", (req, res, next, id) => {
       try {
         if (!Types.ObjectId.isValid(id)) {

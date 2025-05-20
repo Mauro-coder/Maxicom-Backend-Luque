@@ -11,19 +11,10 @@ const login = async (req, res) => {
   res.cookie("token", token, opts).json200(response, "Logged in");
 };
 const online = async (req, res) => {
-  const user = req.user;
-  if (user?._id) {
-    res.status(200).json({
-      user_id: user._id,
-      user_role: user.role,
-      method: req.method,
-      url: req.originalUrl,
-    });
-  } else {
-    const error = new Error("Invalid credentials");
-    error.statusCode = 401;
-    throw error;
+  if (!req.user.user_id) {
+    res.json401();
   }
+  res.json200({ user: req.user });
 };
 const signout = async (req, res) => {
   res.clearCookie("token").json200(null, "Signed out");
@@ -33,7 +24,7 @@ const badAuth = async (req, res) => {
 };
 const google = async (req, res) => {
   const response = req.user;
-  res.json200(response);
+  res.json200(response, "Logged in with Google");
 };
 
 export { register, login, online, signout, badAuth, google };
