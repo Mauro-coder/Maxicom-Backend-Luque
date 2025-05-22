@@ -1,4 +1,3 @@
-import usersManager from "../data/mongo/users.mongo.js";
 
 const register = async (req, res) => {
   const response = req.user;

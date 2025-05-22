@@ -1,23 +1,23 @@
 import cartsManager from "../data/mongo/carts.mongo.js";
 
-const addProductToCart = async (req, res, next) => {
+const addProductToCart = async (req, res) => {
     const { product_id, user_id, quantity } = req.body;
-    const response = await cartsManager.addProductToCart(
+    const one = await cartsManager.addProductToCart(
       product_id,
       user_id,
       quantity
     );
-    res.json201(response)
+    res.json201(one)
 };
-const readProductsFromUser = async (req, res, next) => {
-    const { user_id } = req.params;
+const readProductsFromUser = async (req, res) => {
+    const user_id = req.user._id;
     const all = await cartsManager.readProductsFromUser(user_id);
     if (all.length === 0) {
       res.json404()
     }
     res.json200(all)
 };
-const updateQuantity = async (req, res, next) => {
+const updateQuantity = async (req, res) => {
     const { cart_id } = req.params;
     const {quantity} = req.body;
     const one = await cartsManager.updateQuantity(cart_id, quantity);
