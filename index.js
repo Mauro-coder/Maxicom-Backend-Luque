@@ -1,4 +1,4 @@
-import "dotenv/config.js";
+import "./src/helpers/setEnv.helper.js";
 import { createServer } from "http";
 import { Server as SocketServer } from "socket.io";
 import express from "express";
@@ -11,12 +11,14 @@ import router from "./src/routers/index.router.js";
 import pathHandler from "./src/middlewares/pathHandler.mid.js";
 import errorHandler from "./src/middlewares/errorHandler.mid.js";
 import socketHelper from "./src/helpers/socket.helper.js";
+import args from "./src/helpers/setArgs.helper.js";
 
 /* express server settings */
 const server = express();
 const port = process.env.SERVER_PORT;
 const ready = async () => {
   console.log("server ready on port " + port);
+  console.log("server ready in mode " + args.mode);
   await connectMongo(process.env.MONGO_URL);
 };
 const httpServer = createServer(server);

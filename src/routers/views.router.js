@@ -15,13 +15,13 @@ class ViewsRouter extends CustomRouter {
     this.init();
   }
   init = () => {
-    this.read("/", indexView);
-    this.read("/register", registerView);
-    this.read("/registeruser", registerUser);
-    this.read("/login", loginView);
-    this.read("/profile/:user_id", profileView);
-    this.read("/product/:pid", productView);
-    this.read("/cart/:user_id", cartView);
+    this.read("/",["PUBLIC","USER","ADMIN"], indexView);
+    this.read("/register", ["ADMIN"], registerView);
+    this.read("/registeruser", ["PUBLIC"], registerUser);
+    this.read("/login", ["PUBLIC"], loginView);
+    this.read("/profile/:user_id", ["USER"], profileView);
+    this.read("/product/:pid", ["PUBLIC"], productView);
+    this.read("/cart/:user_id", ["USER"], cartView);
   };
 }
 
