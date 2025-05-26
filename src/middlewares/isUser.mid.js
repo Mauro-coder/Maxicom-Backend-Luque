@@ -1,4 +1,4 @@
-import usersManager from "../data/mongo/users.mongo.js";
+import { usersManager } from "../data/dao.factory.js";
 import { verifyToken } from "../helpers/token.helper.js";
 
 /**

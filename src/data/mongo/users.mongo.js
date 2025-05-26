@@ -15,6 +15,6 @@ class UsersManager extends Manager {
     }
   };
 }
-  
-  const usersManager = new UsersManager();
-  export default usersManager;
+
+const usersManager = new UsersManager();
+export { usersManager };

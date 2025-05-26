@@ -31,7 +31,10 @@ class Manager {
   };
   readOne = async (filter) => {
     try {
-      if (typeof filter === "string" && mongoose.Types.ObjectId.isValid(filter)) {
+      if (
+        typeof filter === "string" &&
+        mongoose.Types.ObjectId.isValid(filter)
+      ) {
         filter = { _id: new mongoose.Types.ObjectId(filter) };
       }
       const one = await this.model.findOne(filter).lean();
@@ -49,14 +52,6 @@ class Manager {
       throw error;
     }
   };
-  // updateOne = async (filter, data) => {
-  //   try {
-  //     const opts = { new: true };
-  //     const one = await this.model.findOneAndUpdate(filter, data, opts);
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // };
   destroyById = async (id) => {
     try {
       const one = await this.model.findOneAndDelete({ _id: id });
@@ -65,22 +60,14 @@ class Manager {
       throw error;
     }
   };
-  // destroyOne = async (filter) => {
-  //   try {
-  //     const one = await this.model.findOneAndDelete(filter);
-  //     return one;
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // };
-  paginate = async(page, limit)=> {
+  paginate = async (page, limit) => {
     try {
-      const all = await this.model.paginate({}, {page, limit})
-      return all
+      const all = await this.model.paginate({}, { page, limit });
+      return all;
     } catch (error) {
-      throw error
+      throw error;
     }
-  }
+  };
 }
 
 export default Manager;

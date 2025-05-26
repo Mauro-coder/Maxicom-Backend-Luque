@@ -1,4 +1,4 @@
-import cartsManager from "../data/mongo/carts.mongo.js";
+import { cartsManager } from "../data/mongo/carts.mongo.js";
 
 const addProductToCart = async (req, res) => {
     const { product_id, user_id, quantity } = req.body;

@@ -1,6 +1,4 @@
-//import productsManager from "../data/fs/products.fs.js";
 import { Types } from "mongoose";
-import productsManager from "../data/mongo/products.mongo.js";
 import {
   createProductService,
   readProductsService,

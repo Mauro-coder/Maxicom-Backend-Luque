@@ -75,4 +75,4 @@ class CartsManager extends Manager {
 
 const cartsManager = new CartsManager();
 
-export default cartsManager;
+export { cartsManager };

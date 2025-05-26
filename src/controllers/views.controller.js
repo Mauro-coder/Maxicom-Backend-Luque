@@ -1,7 +1,6 @@
 // import productsManager from "../data/fs/products.fs.js";
-import productsManager from "../data/mongo/products.mongo.js";
-import usersManager from "../data/mongo/users.mongo.js";
-import cartsManager from "../data/mongo/carts.mongo.js";
+import { productsManager, usersManager, cartsManager } from "../data/dao.factory.js";
+
 import mongoose from "mongoose";
 
 const indexView = async (req, res) => {
