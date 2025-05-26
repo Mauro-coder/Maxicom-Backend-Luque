@@ -6,7 +6,8 @@ import morgan from "morgan";
 import { engine } from "express-handlebars";
 import cookieParser from "cookie-parser";
 import __dirname from "./utils.js";
-import connectMongo from "./src/helpers/mongo.helper.js";
+import cors from "cors";
+import DatabaseConnect from "./src/helpers/dbConnect.helper.js";
 import router from "./src/routers/index.router.js";
 import pathHandler from "./src/middlewares/pathHandler.mid.js";
 import errorHandler from "./src/middlewares/errorHandler.mid.js";
@@ -19,7 +20,12 @@ const port = process.env.SERVER_PORT;
 const ready = async () => {
   console.log("server ready on port " + port);
   console.log("server ready in mode " + args.mode);
-  await connectMongo(process.env.MONGO_URL);
+  const dbConnect1 = new DatabaseConnect(process.env.MONGO_URL);
+  const dbConnect2 = new DatabaseConnect(process.env.MONGO_URL);
+  const dbConnect3 = new DatabaseConnect(process.env.MONGO_URL);
+  const dbConnect4 = new DatabaseConnect(process.env.MONGO_URL);
+  dbConnect1.dbConnect(process.env.MONGO_URL);
+ 
 };
 const httpServer = createServer(server);
 httpServer.listen(port, ready);
@@ -41,6 +47,11 @@ server.use("/assets", express.static("assets"));
 server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
 server.use(cookieParser(process.env.COOKIE_KEY));
+server.use(cors({
+  origin: true,
+  credentials: true,
+  
+}));
 
 /* router */
 server.use("/", router);
