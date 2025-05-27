@@ -14,7 +14,10 @@ const online = async (req, res) => {
   if (!req.user.user_id) {
     res.json401();
   }
-  res.json200({ user: req.user });
+  res.json200({
+    user_id: req.user.user_id,
+    user_role: req.user.role
+  });
 };
 const signout = async (req, res) => {
   res.clearCookie("token").json200(null, "Signed out");

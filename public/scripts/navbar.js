@@ -27,15 +27,15 @@ const isOnline = async () => {
     response = await response.json();
     console.log("🔍 respuesta del backend:", response);
 
-    if (response.user_id) {
+    if (response.response && response.response.user_id) {
       let adminOption = "";
-      if (response.user_role === "admin") {
+      if (response.response.user_role === "admin") {
         adminOption = `<a class="btn btn-success py-1 px-2 m-1" href="/register">Register Product</a>`;
       }
 
       selector.innerHTML = `
-        <a class="btn btn-success py-1 px-2 m-1" href="/profile/${response.user_id}">Profile</a>
-        <a class="btn btn-success py-1 px-2 m-1" href="/cart/${response.user_id}">Cart</a>
+        <a class="btn btn-success py-1 px-2 m-1" href="/profile/${response.response.user_id}">Profile</a>
+        <a class="btn btn-success py-1 px-2 m-1" href="/cart/${response.response.user_id}">Cart</a>
         ${adminOption}
         <button class="btn btn-success py-1 px-2 m-1" id="signout">Sign out</button>
       `;
@@ -59,13 +59,27 @@ const isOnline = async () => {
       });
     } else {
       selector.innerHTML = `
-        <a class="btn btn-success py-1 px-2 m-1" href="/register">Register</a>
+        <a class="btn btn-success py-1 px-2 m-1" href="/registeruser">Register</a>
         <a class="btn btn-success py-1 px-2 m-1" href="/login">Login</a>
       `;
+      localStorage.removeItem("token");
     }
   } catch (error) {
     console.log(error);
+    selector.innerHTML = `
+      <a class="btn btn-success py-1 px-2 m-1" href="/registeruser">Register</a>
+      <a class="btn btn-success py-1 px-2 m-1" href="/login">Login</a>
+    `;
+    localStorage.removeItem("token");
   }
 };
 
+// Ejecutar isOnline al cargar la página
 isOnline();
+
+// Agregar un listener para ejecutar isOnline cuando cambie el localStorage
+window.addEventListener('storage', (e) => {
+  if (e.key === 'token') {
+    isOnline();
+  }
+});
