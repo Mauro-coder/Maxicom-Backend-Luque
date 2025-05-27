@@ -1,10 +1,10 @@
 # Maxicom-Backend-Luque
 
-Este proyecto se encuentra en desarrollo para el curso "Programación Backend I: Desarrollo Avanzado de Backend" brindado por Coderhouse, la misma cuenta con la creacion de un backend basico a modo de aprender como son las distintas funcionalidades y su utilizacion mediante handlebars para la vista de frontend.
+Este proyecto se encuentra en desarrollo para el curso "Programación Backend II: Diseño y Arquitectura Backend" brindado por Coderhouse, la misma cuenta con la creacion de un backend un poco mas avanzado a modo de aprender como son las distintas funcionalidades (controllers, helpers, middlewares, services, routers, repositories, dao y dto) y su utilizacion mediante handlebars y conexion a react para la vista de frontend.
 
 ## Estado del proyecto
 
-Como todo proyecto nunca se enuentra terminado dado que siempre puede mejorarse, actualmente cuenta con todas las funcionalidades aprendidas en el curso. Este proyecto se encuentra basado en un Ecommerce de Celulares y Accesorios.
+Como todo proyecto nunca se encuentra terminado dado que siempre puede mejorarse, actualmente cuenta con todas las funcionalidades aprendidas en el curso. Este proyecto se encuentra basado en un Ecommerce de Celulares y Accesorios y permite registrarse, loguearse, comprar productos, ademas cuenta con la funcionalidad de al momento de registrarse, recibir un correo con la clave de verificacion
 
 ### Instalación ⚙️
 
@@ -71,6 +71,11 @@ Mediante Handlebars se crearon las distintas vistas que va a tener este Ecommerc
 - [Mongo-Compass](https://www.mongodb.com/es/products/tools/compass)
 - [Mongoose](https://mongoosejs.com)
 - [Mongoose-Paginate-v2](https://www.npmjs.com/package/mongoose-paginate-v2)
+- [bcryptjs](https://www.npmjs.com/package/bcryptjs)
+- [cors](https://www.npmjs.com/package/cors)
+- [cookie-parser](www-npmjs-com/package/cookie-parser)
+- [axios](https://www.npmjs.com/package/axios)
+- [nodemailer](https://nodemailer.com)
 
 # Desarrollado por Mauro Luque 
 
