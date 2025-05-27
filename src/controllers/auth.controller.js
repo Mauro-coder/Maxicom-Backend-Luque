@@ -1,3 +1,4 @@
+import { usersManager } from "../data/dao.factory.js";
 
 const register = async (req, res) => {
   const response = req.user;
@@ -25,5 +26,12 @@ const google = async (req, res) => {
   const response = req.user;
   res.json200(response, "Logged in with Google");
 };
+const verifyAccount = async (req, res) => {
+  const { email, code } = req.params;
+  const user = await usersManager.readOne({ email, verifyCode: code });
+  if (!user) return res.json401()
+  await usersManager.updateById(user._id, { isVerify: true });
+  res.json200("VERIFIED")
+}
 
-export { register, login, online, signout, badAuth, google };
+export { register, login, online, signout, badAuth, google, verifyAccount };

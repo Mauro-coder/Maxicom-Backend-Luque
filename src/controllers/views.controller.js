@@ -18,7 +18,6 @@ const indexView = async (req, res) => {
     };
     return res.status(200).render("index", data);
 };
-
 const productView = async (req, res) => {
     const { pid } = req.params;
     if (!mongoose.Types.ObjectId.isValid(pid)) {
@@ -47,7 +46,6 @@ const cartView = async (req, res) => {
     return res.status(500).render("error");
   }
 };
-
 const registerView = (req, res) => {
     const data = {
       title: "Real Register",
@@ -55,17 +53,15 @@ const registerView = (req, res) => {
     return res.status(200).render("realRegister", data);
 
 };
-
 const registerUser = (req, res) => {
   try {
-    res.status(200).render("register", { title: "REGISTER FORM" });
+    res.status(200).render("userRegister", { title: "REGISTER FORM" });
   } catch (error) {
     console.log(error);
     const statusCode = error.statusCode || 500;
     res.status(statusCode).render("error");
   }
 };
-
 const loginView = (req, res) => {
   try {
     res.status(200).render("login", { title: "LOGIN FORM" });
@@ -75,7 +71,6 @@ const loginView = (req, res) => {
     res.status(statusCode).render("error");
   }
 };
-
 const profileView = async (req, res) => {
   try {
     const { user_id } = req.params;
@@ -86,7 +81,6 @@ const profileView = async (req, res) => {
     return res.status(500).render("error");
   }
 };
-
 const verifyView = (req, res) => {
   try {
     res.status(200).render("verify", { title: "VERIFY YOUR ACCOUNT" });

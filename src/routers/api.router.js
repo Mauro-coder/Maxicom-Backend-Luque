@@ -5,7 +5,7 @@ import cartsRouter from "./api/carts.router.js";
 import cookiesRouter from "./api/cookies.router.js";
 import sessionsRouter from "./api/sessions.router.js";
 import authRouter from "./api/auth.router.js";
-import { sumCb, sumProcessCb } from "../controllers/api.controller.js";
+import { sumCb, sumProcessCb, sendEmailCb } from "../controllers/api.controller.js";
 
 class ApiRouter extends CustomRouter {
   constructor() {
@@ -21,6 +21,7 @@ class ApiRouter extends CustomRouter {
     this.use("/carts", cartsRouter);
     this.read("/sum", ["PUBLIC"], sumCb);
     this.read("/sumProcess", ["PUBLIC"], sumProcessCb);
+    this.read("/send/:email", ["PUBLIC"], sendEmailCb);
   };
 }
 

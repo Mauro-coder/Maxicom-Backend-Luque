@@ -1,3 +1,4 @@
+import sendEmail from "../helpers/email.helper.js";
 import sum from "../helpers/sum.helper.js";
 import { fork } from "child_process";
 
@@ -13,5 +14,11 @@ const sumCb = (req, res) => {
       return res.json200(result);
     });
   };
+const sendEmailCb = async(req, res) => {
+  const { email } = req.params;
+  await sendEmail({ email });
+  return res.json200("Email enviado");
+};
 
-  export { sumCb, sumProcessCb };
+
+  export { sumCb, sumProcessCb, sendEmailCb };

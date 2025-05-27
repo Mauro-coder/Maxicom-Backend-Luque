@@ -7,6 +7,7 @@ import {
   registerUser,
   profileView,
   loginView,
+  verifyView,
 } from "../controllers/views.controller.js";
 
 class ViewsRouter extends CustomRouter {
@@ -22,6 +23,7 @@ class ViewsRouter extends CustomRouter {
     this.read("/profile/:user_id", ["USER"], profileView);
     this.read("/product/:pid", ["PUBLIC"], productView);
     this.read("/cart/:user_id", ["USER"], cartView);
+    this.read("/verify", ["PUBLIC"], verifyView);
   };
 }
 

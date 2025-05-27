@@ -15,6 +15,8 @@ const schema = new Schema(
       default:
         "https://icons.veryicon.com/png/o/miscellaneous/standard/avatar-15.png",
     },
+    isVerify: { type: Boolean, default: false },
+    verifyCode: { type: String, required: true },
   },
   { timestamps: true }
 );

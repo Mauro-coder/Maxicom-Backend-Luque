@@ -6,6 +6,7 @@ import { usersManager } from "../data/dao.factory.js";
 import { createHash, verifyHash } from "../helpers/hash.helper.js";
 import { createToken } from "../helpers/token.helper.js";
 import UserDTO from "../dto/users.dto.js";
+import sendEmailOfRegister from "../helpers/registerEmail.helper.js";
 
 const {
   SECRET,
@@ -39,6 +40,7 @@ passport.use(
         }
         data = new UserDTO(data);
         const response = await usersManager.create(data);
+        await sendEmailOfRegister({ email, verifyCode: response.verifyCode });
         done(null, response);
       } catch (error) {
         done(error);
@@ -56,6 +58,13 @@ passport.use(
         if (!response) {
           return done(null, null, {
             message: "Invalid credentials",
+            statusCode: 401,
+          });
+        }
+        const verifyAccount = response.isVerify;
+        if (!verifyAccount) {
+          return done(null, null, {
+            message: "Verify your account",
             statusCode: 401,
           });
         }

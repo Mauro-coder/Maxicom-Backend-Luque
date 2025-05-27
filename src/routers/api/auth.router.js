@@ -6,6 +6,7 @@ import {
   signout,
   badAuth,
   google,
+  verifyAccount,
 } from "../../controllers/auth.controller.js";
 import passport from "../../middlewares/passport.mid.js";
 import passportCb from "../../middlewares/passportCb.mid.js";
@@ -38,7 +39,7 @@ class AuthRouter extends CustomRouter {
       }),
       google
     );
-
+    this.read("/email/:email/code/:code", ["PUBLIC"], verifyAccount);
   };
 }
 
